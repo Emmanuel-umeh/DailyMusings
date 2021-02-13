@@ -18,8 +18,8 @@ router.get("/gallery", async(req, res) => {
 router.get("/contact", async(req, res) => {
     res.render("contact")
 })
-router.get("/promotions", async(req, res) => {
-    res.render("promotions")
+router.get("/blog", async(req, res) => {
+    res.render("blog")
 })
 
 
