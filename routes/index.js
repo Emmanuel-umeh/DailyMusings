@@ -21,6 +21,9 @@ router.get("/contact", async(req, res) => {
 router.get("/blog", async(req, res) => {
     res.render("blog")
 })
+router.get("/single-blog", async(req, res) => {
+    res.render("single_blog")
+})
 
 
 router.post("/newsletter", async(req, res) => {
