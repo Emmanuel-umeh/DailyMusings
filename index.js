@@ -1,3 +1,6 @@
+
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -9,7 +12,7 @@ var cookieParser = require('cookie-parser');
 var flash    = require('connect-flash');
 var methodOverride = require('method-override')
 const helmet = require('helmet')
-
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(
@@ -20,24 +23,36 @@ app.use(
 );
 
 
+
 app.use(express.json());
 
 // mongoose uri
 
+// const db = process.env.MONGO_URI
+// console.log(db);
+
 // Connect to mongoose
+try{
+  mongoose
+  .connect("mongodb+srv://Mega:Loaded888@dailymusings.ixnvp.mongodb.net/dailymusings?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  useFindAndModify : false
+  })
+  .then(() => console.log("MongoDB Connected...",process.env.MONGO_URL))
+  .catch((err) =>{
+    if(err){
+      // return res.send({msg:err})
+      console.log("error ", err)
+    }
+  });
 
-// mongoose
-//   .connect(db, 
-//     {
-//       useNewUrlParser : true,
-//       useCreateIndex : true,
-//       useUnifiedTopology: true 
-
-//     })
-//   .then(() => console.log("MongoDB Connected..."))
-//   .catch(err => console.log(err));
-
-
+}catch(e){
+  if(e){
+  return e
+  }
+}
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); //

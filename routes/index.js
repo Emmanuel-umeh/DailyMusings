@@ -24,6 +24,9 @@ router.get("/blog", async(req, res) => {
 router.get("/single-blog", async(req, res) => {
     res.render("single_blog")
 })
+router.get("/admin-panel", async(req, res) => {
+    res.render("dashboard/index")
+})
 
 
 router.post("/newsletter", async(req, res) => {
