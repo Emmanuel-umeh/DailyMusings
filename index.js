@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+var session      = require('express-session');
 const path = require("path");
 var morgan = require('morgan')
 var cookieParser = require('cookie-parser');
@@ -23,7 +23,7 @@ app.use(
 );
 
 
-
+// console.log("path", process.env.path)
 app.use(express.json());
 
 // mongoose uri
@@ -34,7 +34,7 @@ app.use(express.json());
 // Connect to mongoose
 try{
   mongoose
-  .connect("mongodb+srv://Mega:Loaded888@dailymusings.ixnvp.mongodb.net/dailymusings?retryWrites=true&w=majority", {
+  .connect("mongodb+srv://admin:Loaded888@cluster0.onrce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -68,7 +68,7 @@ app.use(cookieParser()); //
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "ejs");
   /** VIEWS CONFIGURATION */
-  
+  app.use(session({ secret: 'sdmlsd&**nkjas)(USse' })); // session secret
   app.use(flash()); // use connect-flash for flash messages stored in session
  
   /** END PASPORT */

@@ -1,0 +1,85 @@
+
+
+
+  
+      <%- include('../partials/dashboard/Header.ejs'); %>
+
+
+
+      <body class="">
+        <div class="wrapper ">
+          <div class="sidebar" data-color="white" data-active-color="danger">
+        
+              <%- include('../partials/dashboard/Sidebar.ejs'); %>
+          </div>
+          <div class="main-panel">
+            <!-- Navbar -->
+   
+
+<%- include('../partials/dashboard/Nav.ejs'); %>
+
+            <!-- End Navbar -->
+            <div class="content">
+              <div class="row">
+         
+                <div class="col-md-12">
+                  <div class="card card-user">
+                    <div class="card-header">
+                      <h5 class="card-title">Create Blog Category</h5>
+                    </div>
+
+
+
+                    
+                    <% if (message.length > 0) { %>
+                      <!-- <%= message %> -->
+                       <!-- <%= message %> -->
+                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong class="text-center">
+                            <%= message %></strong> 
+                            
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                  <% } %> 
+                  <% if (successMessage.length > 0) { %>
+                      <!-- <%= message %> -->
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong class="text-center">
+                              <%= successMessage %></strong> 
+                              
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                  <% } %>
+
+
+                    <div class="card-body">
+                      <form  method="POST"  action="/admin-panel/create-category" enctype="application/json">
+                        <div class="row">
+                          <div class="col-md-12 pr-1">
+                            <div class="form-group">
+                              <label>Blog Category Name</label>
+                              <input name="category_name"  required type="text" class="form-control" placeholder="title" value="Devotional">
+                            </div> 
+                          </div>
+                    
+                     </div>
+                 
+                        <div class="row">
+                          <div class="update ml-auto mr-auto">
+                            <button  type="submit" class="btn btn-primary btn-round">Create Category</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+      
+      <%- include('../partials/dashboard/Footer.ejs'); %>
+      

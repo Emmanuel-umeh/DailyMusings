@@ -18,7 +18,7 @@ const commentSchema = new mongoose.Schema({
 
     owner:{
         type:Schema.Types.ObjectId,
-        ref:'signupuser'
+        ref:'admin'
     },
 
     dateCreated:{

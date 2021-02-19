@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const slugify = require('slugify')
 
 
-const postSchema = new mongoose.Schema({
+const downloadableSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -20,7 +20,7 @@ const postSchema = new mongoose.Schema({
     },
     category:{
         type:Schema.Types.ObjectId,
-        ref:"blogcategory"
+        ref:"category"
     },
     
     status:{
@@ -36,6 +36,11 @@ const postSchema = new mongoose.Schema({
         required: true,
     },
     image:{
+        type:String
+    },
+
+    // downloadable material link
+    link:{
         type:String
     },
     views: {
@@ -75,6 +80,6 @@ function validatePost(post){
 // }
 
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Post', downloadableSchema);
 
 // exports.validate = validatePost;

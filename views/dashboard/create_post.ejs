@@ -14,68 +14,10 @@
     </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <a class="navbar-brand" href="javascript:;">Create Blog Posts</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="nc-icon nc-zoom-split"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link btn-magnify" href="javascript:;">
-                  <i class="nc-icon nc-layout-11"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    
+
+<%- include('../partials/dashboard/Nav.ejs'); %>
+
       <!-- End Navbar -->
       <div class="content">
         <div class="row">
@@ -83,31 +25,71 @@
           <div class="col-md-12">
             <div class="card card-user">
               <div class="card-header">
-                <h5 class="card-title">Edit Profile</h5>
+                <h5 class="card-title">Create Blog Posts</h5>
               </div>
+
+
+                  
+              <% if (message.length > 0) { %>
+                <!-- <%= message %> -->
+                 <!-- <%= message %> -->
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong class="text-center">
+                      <%= message %></strong> 
+                      
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <% } %> 
+            <% if (successMessage.length > 0) { %>
+                <!-- <%= message %> -->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong class="text-center">
+                        <%= successMessage %></strong> 
+                        
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            <% } %>
               <div class="card-body">
-                <form>
+                <form  method="POST"  action="/admin-panel/create-blog" enctype="application/json">
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
-                        <label>Company (disabled)</label>
-                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
-                      </div>
+                        <label>Blog Title</label>
+                        <input                      name="title"  required type="text" class="form-control" placeholder="title" value="Blog">
+                      </div> 
                     </div>
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-5 px-1">
                       <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" value="michael23">
+                        <label>Category</label>
+                        <!-- <input type="text" class="form-control" placeholder="Username" value="michael23"> -->
+                        <select
+                        name="category" 
+                        required class="form-control"  name="category" id="cars">
+
+                        <%categories.forEach((category) => {%>
+                          <option value="<%=category._id%>"><%=category.category_name%></option>
+                      
+                          
+
+                      
+          <% })%>
+                      
+                      
+                          </select>
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <!-- <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label for="exampleInputEmail1">Blog Image</label>
+                        <input type="url" class="form-control" placeholder="Link to image">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
-                  <div class="row">
+                  <!-- <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>First Name</label>
@@ -115,21 +97,21 @@
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
-                      <div class="form-group">
+                      <div class="form-group">`
                         <label>Last Name</label>
                         <input type="text" class="form-control" placeholder="Last Name" value="Faker">
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+                  </div> -->
+                  <!-- <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Address</label>
                         <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+                  </div> -->
+                  <!-- <div class="row">
                     <div class="col-md-4 pr-1">
                       <div class="form-group">
                         <label>City</label>
@@ -148,19 +130,21 @@
                         <input type="number" class="form-control" placeholder="ZIP Code">
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>About Me</label>
+                        <label>Content</label>
 
-                        <textarea id="example" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                        <textarea
+                        name="content" 
+                        required id="example" class="form-control textarea">write your amazing blog here</textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+                      <button  type="submit" class="btn btn-primary btn-round">Create Blog</button>
                     </div>
                   </div>
                 </form>

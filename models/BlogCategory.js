@@ -39,7 +39,5 @@ function validateBlogCategry(category){
 }
 
 
-module.exports = {
-    BlogCategory : mongoose.model("blogcategory", BlogCategorySchema),
-    validateBlogCategry : validateBlogCategry
-}
+
+module.exports = mongoose.model('category', BlogCategorySchema);
