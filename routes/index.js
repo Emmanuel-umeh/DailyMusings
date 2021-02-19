@@ -10,6 +10,8 @@ const BlogCategory = require("../models/BlogCategory");
 const Downloadables = require("../models/Downloadable");
 const Post = require('../models/Post');
 
+const moment = require("moment")
+
 router.get("/", async(req, res) => {
     res.render("index")
 })
@@ -35,10 +37,11 @@ router.get("/blog", async(req, res) => {
   const blogs = await Post.find()
                           .limit(limit * 1)
                           .skip((page - 1) * limit)
+                          .populate("category")
                           .exec()
 
                           const count = await Post.countDocuments();
-
+console.log({blogs})
           
   const toalPages = Math.ceil(count / limit) 
   console.log("TOTAL PAGES", toalPages)
@@ -48,7 +51,8 @@ router.get("/blog", async(req, res) => {
       message: req.flash("error"),
       successMessage: req.flash("success"),
       toalPages,
-      currentPage: page
+      currentPage: page,
+      moment
     })
 
 

@@ -20,7 +20,7 @@ const postSchema = new mongoose.Schema({
     },
     category:{
         type:Schema.Types.ObjectId,
-        ref:"blogcategory"
+        ref:"category"
     },
     
     status:{
