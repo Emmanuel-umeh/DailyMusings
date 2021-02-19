@@ -25,7 +25,34 @@ router.get("/contact", async(req, res) => {
     res.render("contact")
 })
 router.get("/blog", async(req, res) => {
-    res.render("blog")
+
+
+
+  
+  const { page = 1} = req.query;
+  const limit = 5
+ 
+  const blogs = await Post.find()
+                          .limit(limit * 1)
+                          .skip((page - 1) * limit)
+                          .exec()
+
+                          const count = await Post.countDocuments();
+
+          
+  const toalPages = Math.ceil(count / limit) 
+  console.log("TOTAL PAGES", toalPages)
+
+    res.render("blog", {
+      blogs,
+      message: req.flash("error"),
+      successMessage: req.flash("success"),
+      toalPages,
+      currentPage: page
+    })
+
+
+
 })
 router.get("/single-blog", async(req, res) => {
     res.render("single_blog")
