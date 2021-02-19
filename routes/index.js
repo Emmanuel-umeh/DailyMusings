@@ -74,12 +74,7 @@ router.get("/admin-panel/blogs", async(req, res) => {
       currentPage: page
     })
 })
-router.get("/admin-panel/downloadables", async(req, res) => {
-    res.render("dashboard/downloadables")
-})
-router.get("/admin-panel/downloadables", async(req, res) => {
-    res.render("dashboard/downloadables")
-})
+
 router.get("/admin-panel/create-blog", async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
@@ -241,14 +236,27 @@ router.post('/admin-panel/upload_image', function (req, res) {
 router.get('/admin-panel/downloadables', async (req, res) => {
 
 
-  var categories = await BlogCategory.find()
-  // Store image.
-  res.render("dashboard/create_downloadable", {
-    // editor
-    categories,
-    message: req.flash("error"),
-    successMessage: req.flash("success"),
-  })
+  const { page = 1} = req.query;
+  const limit = 5
+ 
+  const downloadables = await Downloadables.find()
+                          .limit(limit * 1)
+                          .skip((page - 1) * limit)
+                          .exec()
+
+                          const count = await Downloadables.countDocuments();
+
+          
+  const toalPages = Math.ceil(count / limit) 
+  console.log("TOTAL PAGES", toalPages)
+
+    res.render("dashboard/downloadables", {
+      downloadables,
+      message: req.flash("error"),
+      successMessage: req.flash("success"),
+      toalPages,
+      currentPage: page
+    })
 });
 
 
@@ -280,7 +288,7 @@ req.flash("error" , "Please enter all fields")
   }
 
 
-  var new_post = new Post({
+  var new_post = new Downloadables({
     title,category,link, content
   })
   // console.log(title, category, content)
@@ -293,6 +301,60 @@ req.flash("error" , "Please enter all fields")
   }
 
 })
+
+
+// downloadables publish
+// publish blog
+router.put("/admin-panel/downloadable/:id/publish", async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/downloadables")
+    }
+
+    await Downloadables.findByIdAndUpdate(id, {
+      $set:{
+        status : "published"
+      }
+    }) 
+    req.flash("success" , "Downloadable material published successfully and is now visible to users")
+    return res.redirect("/admin-panel/downloadables")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/downloadables")
+  }
+
+})
+// Un publish downloadable
+router.put("/admin-panel/downloadable/:id/unpublish", async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/downloadables")
+    }
+
+    await Downloadables.findByIdAndUpdate(id, {
+      $set:{
+        status : "draft"
+      }
+    }) 
+    req.flash("success" , "Downloadable material unpublished successfully and is no longer visible to users")
+    return res.redirect("/admin-panel/downloadables")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/downloadables")
+  }
+
+})
+
 
 
 router.post("/newsletter", async(req, res) => {

@@ -195,14 +195,14 @@
               <nav aria-label="...">
                 <ul class="pagination justify-content-end mb-0">
                   <li class="page-item <%= Number(currentPage) == 1 ? 'disabled' : null %>">
-                    <a class="page-link" href="/admin/investments?page=<%= Number(currentPage) -1 %>" tabindex="-1">
+                    <a class="page-link" href="/admin-panel/blogs?page=<%= Number(currentPage) -1 %>" tabindex="-1">
                       <i class="nc-icon nc-minimal-left"></i>
                       <span class="sr-only">Previous</span>
                     </a>
                   </li>
                   <!-- <% for (var i =1; i <=toalPages;  i++ ) { %>
                     <li class="page-item <% if (currentPage == i) { %> <%= 'active' %> <% } %>">
-                        <a class="page-link " href="/admin/investments?page=<%= i %>"><%= i %></a>
+                        <a class="page-link " href="/admin-panel/blogs?page=<%= i %>"><%= i %></a>
                       </li>   
                     <%#  will output the numbers 1-10 %>
                     <% } %> -->
@@ -222,16 +222,16 @@
                           <% for (; i <= (Number(currentPage) + 1) && i <= toalPages; i++) { %>
                               <% if (i == currentPage) { %>
                                 <li class="page-item active">
-                                  <a class="page-link " href="/admin/investments?page=<%= i %>"><%= i %></a>
+                                  <a class="page-link " href="/admin-panel/blogs?page=<%= i %>"><%= i %></a>
                                 </li>   
                               <% } else { %>
                                 <li class="page-item ">
-                                  <a class="page-link " href="/admin/investments?page=<%= i %>"><%= i %></a>
+                                  <a class="page-link " href="/admin-panel/blogs?page=<%= i %>"><%= i %></a>
                                 </li>   
                               <% } %>
                               <% if (i == Number(currentPage) + 1 && i < toalPages) { %>
                                 <li class="page-item">
-                                  <a class="page-link " href="/admin/investments?page=<%= toalPages %>">...</a>
+                                  <a class="page-link " href="/admin-panel/blogs?page=<%= toalPages %>">...</a>
                                 </li>   
                               <% } %>
                           <% } %>
@@ -242,7 +242,7 @@
 
                   <% if (currentPage != toalPages) { %>
                   <li class="page-item">
-                    <a class="page-link" href="/admin/investments?page=<%= Number(currentPage) +1 %>" tabindex="1">
+                    <a class="page-link" href="/admin-panel/blogs?page=<%= Number(currentPage) +1 %>" tabindex="1">
                       <i class="nc-icon nc-align-right"></i>
                       <span class="sr-only">Next</span>
                     </a>

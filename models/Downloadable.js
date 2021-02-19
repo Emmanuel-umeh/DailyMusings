@@ -55,7 +55,7 @@ const downloadableSchema = new mongoose.Schema({
 });
 
 
-postSchema.pre("save", function(next) {
+downloadableSchema.pre("save", function(next) {
     slug = slugify(this.title);
     this.slug=slug.toLowerCase() 
     next();
@@ -80,6 +80,6 @@ function validatePost(post){
 // }
 
 
-module.exports = mongoose.model('Post', downloadableSchema);
+module.exports = mongoose.model('Downloadable', downloadableSchema);
 
 // exports.validate = validatePost;
