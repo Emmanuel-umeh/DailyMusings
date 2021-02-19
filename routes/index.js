@@ -162,6 +162,28 @@ router.put("/admin-panel/:id/unpublish", async(req, res) => {
 
 })
 
+router.post("/admin-panel/:id/delete", async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/downloadables")
+    }
+
+    await Post.findByIdAndDelete(id) 
+    req.flash("success" , "Blog post deleted successfully and is no longer visible to users")
+    return res.redirect("/admin-panel/blogs")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/blogs")
+  }
+
+})
+
+
 
 router.post("/admin-panel/create-category", async(req, res) => {
   // var editor =  FroalaEditor("#example")
@@ -347,6 +369,26 @@ router.put("/admin-panel/downloadable/:id/unpublish", async(req, res) => {
       }
     }) 
     req.flash("success" , "Downloadable material unpublished successfully and is no longer visible to users")
+    return res.redirect("/admin-panel/downloadables")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/downloadables")
+  }
+
+})
+router.post("/admin-panel/downloadable/:id/delete", async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/downloadables")
+    }
+
+    await Downloadables.findByIdAndDelete(id) 
+    req.flash("success" , "Downloadable material deleted successfully and is no longer visible to users")
     return res.redirect("/admin-panel/downloadables")
   } catch (error) {
     req.flash("error" , "Something went wrong. Please contact developer")

@@ -102,7 +102,7 @@
             <% } %> 
             <% if (successMessage.length > 0) { %>
                 <!-- <%= message %> -->
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     <strong class="text-center">
                         <%= successMessage %></strong> 
                         
@@ -178,9 +178,16 @@
                 
                         </td>
                         
+                 
+                        <form method="post" method="POST" action="/admin-panel/<%= blog._id %>/delete?_method=POST">
                         <td>
-                       <a href="#">          <i style="color: red; font-size: medium;" class="nc-icon nc-simple-remove"></i></a>
+                      <button  type="submit"  style="background-color: transparent;" class="btn btn-primary btn-round">          <i style="color: red; font-size: medium;" class="nc-icon nc-simple-remove"></i></button>
+                     
                         </td>
+
+                      </form>
+
+                   
                       </tr>
 
                       <% })%>

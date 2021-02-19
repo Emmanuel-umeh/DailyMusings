@@ -120,9 +120,15 @@
                       
                               </td>
                               
-                              <td>
-                             <a href="#">          <i style="color: red; font-size: medium;" class="nc-icon nc-simple-remove"></i></a>
-                              </td>
+                              <form method="post" method="POST" action="/admin-panel/downloadable/<%= downloadable._id %>/delete?_method=POST">
+                                <td>
+                              <button  type="submit"  style="background-color: transparent;" class="btn btn-primary btn-round">          <i style="color: red; font-size: medium;" class="nc-icon nc-simple-remove"></i></button>
+                             
+                                </td>
+        
+                              </form>
+        
+                           
                             </tr>
       
                             <% })%>
