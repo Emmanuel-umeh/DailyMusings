@@ -1,6 +1,8 @@
 const express = require('express')
 const request= require("request")
 
+
+var FroalaEditor = require("wysiwyg-editor-node-sdk/lib/froalaEditor.js");
 const router = express.Router()
 
 
@@ -24,8 +26,26 @@ router.get("/blog", async(req, res) => {
 router.get("/single-blog", async(req, res) => {
     res.render("single_blog")
 })
+
+
+// admin routes
 router.get("/admin-panel", async(req, res) => {
     res.render("dashboard/index")
+})
+router.get("/admin-panel/blogs", async(req, res) => {
+    res.render("dashboard/blog")
+})
+router.get("/admin-panel/downloadables", async(req, res) => {
+    res.render("dashboard/downloadables")
+})
+router.get("/admin-panel/downloadables", async(req, res) => {
+    res.render("dashboard/downloadables")
+})
+router.get("/admin-panel/create-blog", async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+    res.render("dashboard/create_post", {
+      // editor
+    })
 })
 
 

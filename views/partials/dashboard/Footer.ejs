@@ -3,9 +3,9 @@
       <div class="row">
         <nav class="footer-nav">
           <ul>
-            <li><a href="https://www.creative-tim.com" target="_blank">Creative Tim</a></li>
-            <li><a href="https://www.creative-tim.com/blog" target="_blank">Blog</a></li>
-            <li><a href="https://www.creative-tim.com/license" target="_blank">Licenses</a></li>
+            <li><a href="#" >Dailymusings</a></li>
+            <li><a href="#" target="_blank">Blog</a></li>
+            <!-- <li><a href="#" target="_blank">Licenses</a></li> -->
           </ul>
         </nav>
         <div class="credits ml-auto">
@@ -34,11 +34,18 @@
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/dashboard/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="/dashboard/demo/demo.js"></script>
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
 <script>
 $(document).ready(function() {
   // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
   demo.initChartsPages();
 });
+</script>
+
+<script>
+  new FroalaEditor('textarea');
 </script>
 </body>
 
