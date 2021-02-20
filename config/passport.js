@@ -4,7 +4,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var User            = require("../models/Admin");
+var Admin            = require("../models/Admin");
 
 
 // expose this function to our app using module.exports
@@ -23,7 +23,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+        Admin.findById(id, function(err, user) {
             done(err, user);
         });
     });
@@ -51,48 +51,24 @@ module.exports = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        var lowercase_username = req.body.username.toLowerCase()
-        const username_exists = await User.findOne({ 'username' :  lowercase_username})
-        console.log(username_exists)
-        const phone_exists = await User.findOne({ 'telephone' :  req.body.telephone})
-        if( username_exists ){
-            return done(null, false, req.flash('signupMessage', 'username already taken'));
-        }
-        if(phone_exists ){
-            return done(null, false, req.flash('signupMessage', 'number already used'));
-        }
-        const user_exists = await User.findOne({ 'email' :  email })
+
+        const user_exists = await Admin.findOne({ 'email' :  email })
         if(user_exists){
+            console.log("user alread exists!!!!!!!!")
             return done(null, false, req.flash('signupMessage', 'email already taken'));
         } 
-        var newUser    = new User();
+        var newAdmin    = new Admin();
         // // set the user's local credentials
-        // newUser.local.username = username.toLowerCase()
-        newUser.email    = email.toLowerCase();
-        newUser.password = newUser.generateHash(password);
-        newUser.username = req.body.username.toLowerCase()
-        newUser.firstname = req.body.firstname.toLowerCase()
-        newUser.lastname = req.body.lastname.toLowerCase()
-        newUser.telephone = req.body.telephone
-        await newUser.save()
-                /** referral */
-        if(req.query['ref']){
-            console.log(req.query['ref'])
-            const updated_user =  await User.findOneAndUpdate({'username':req.query['ref']}, {
-                    $push:{
-                        "referred_users":newUser._id
-                    }
-            })
-            const referred_by_update = await User.findByIdAndUpdate(newUser._id, {
-                $set:{
-                    "referredBy":updated_user._id
-                }
-            }) 
-            return done(null, newUser)
-        }else{
-            return done(null, newUser);
-        }
-
+        // newAdmin.local.username = username.toLowerCase()
+        newAdmin.email    = email.toLowerCase();
+        newAdmin.password = newAdmin.generateHash(password);
+      
+        newAdmin.firstname = req.body.firstname.toLowerCase()
+        newAdmin.lastname = req.body.lastname.toLowerCase()
+        await newAdmin.save()
+   
+            return done(null, newAdmin);
+      
         }
         );
 
@@ -109,28 +85,36 @@ module.exports = function(passport) {
     async(req,email, password, done) =>{
 
         // asynchronous
-        // User.findOne wont fire unless data is sent back
+        // Admin.findOne wont fire unless data is sent back
         process.nextTick(async() => {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-       
-        const user_exists = await User.findOne({ 'email' :  email })
+
+        try {
+                   
+        const user_exists = await Admin.findOne({ 'email' :  email })
+
+        console.log({user_exists})
         if(user_exists){
             return done(null, false, req.flash('signupMessage', 'email already taken'));
         } 
-        var newUser    = new User();
+        var newAdmin    = new Admin();
         // // set the user's local credentials
-        // newUser.local.username = username.toLowerCase()
-        newUser.email    = email.toLowerCase();
-        newUser.password = newUser.generateHash(password);
-        newUser.firstname = req.body.firstname.toLowerCase()
-        newUser.lastname = req.body.lastname.toLowerCase()
-        await newUser.save()
+        // newAdmin.local.username = username.toLowerCase()
+        newAdmin.email    = email.toLowerCase();
+        newAdmin.password = newAdmin.generateHash(password);
+        newAdmin.firstname = req.body.firstname.toLowerCase()
+        newAdmin.lastname = req.body.lastname.toLowerCase()
+        await newAdmin.save()
                 /** referral */
    
-            return done(null, newUser);
+            return done(null, newAdmin);
         
+
+        } catch (error) {
+            console.warn({error})
+        }
 
         }
         );
@@ -148,7 +132,7 @@ module.exports = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'email' :  email.toLowerCase() }, function(err, user) {
+        Admin.findOne({ 'email' :  email.toLowerCase() }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);

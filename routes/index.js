@@ -13,10 +13,12 @@ const Post = require('../models/Post');
 const moment = require("moment")
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
-const passport = require("../config/passport");
+
 const isLoggedIn = require('../middleware/loggedIn');
+let passport
 
-
+passport = require('passport');
+require('../config/passport')(passport);
 // auth handles
 // router.get("/signup",csrfProtection,function (req, res) {
 //   console.log(req);
@@ -29,10 +31,10 @@ const isLoggedIn = require('../middleware/loggedIn');
 // });
 // router.post(
 //   "/signup",
-//   csrfProtection,
+//   // csrfProtection,
 //   // checkPasswords,
 //   passport.authenticate("admin-signup", {
-//     successRedirect : '/admin', // redirect to the secure profile section
+//     successRedirect : '/admin-panel', // redirect to the secure profile section
 //     failureRedirect: "/admin/signup", // redirect back to the signup page if there is an error
 //     failureFlash: true, // allow flash messages
 //   }),
@@ -47,7 +49,8 @@ const isLoggedIn = require('../middleware/loggedIn');
 //     //     "isAdmin":truw
 //     //   }
 //     // })
-//     res.redirect("/admin");
+//     // res.redirect("/admin");
+//     res.json("signed up successfully")
 //   }
 // );
 
