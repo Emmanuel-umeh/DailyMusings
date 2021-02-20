@@ -17,7 +17,7 @@
 
               <%blogs && blogs.map((blog, key) => {%>
               <div class="post-entry-horzontal">
-                <a href="/single-blog">
+                <a href="/blog/<%= blog.slug %>">
                   <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url(images/img_10.jpg);"></div>
                   <span class="text">
                     <div class="post-meta">

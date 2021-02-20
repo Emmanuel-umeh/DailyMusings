@@ -9,6 +9,7 @@ const router = express.Router()
 const BlogCategory = require("../models/BlogCategory");
 const Downloadables = require("../models/Downloadable");
 const Post = require('../models/Post');
+const {Comment} = require('../models/Comment');
 
 const moment = require("moment")
 var csrf = require('csurf')
@@ -187,14 +188,17 @@ router.get("/blog/:slug", async(req, res) => {
    $set:{
      views: views+1
    }
- },{new : true}).populate("category")
+ },{new : true}).populate("category").populate("comments")
 
+
+ var comments = post.comments
 
 
     res.render("single_blog", {
       post,
        categories, moment,
-       popular_posts
+       popular_posts,
+       comments
     })
 })
 
