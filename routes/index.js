@@ -130,12 +130,46 @@ console.log({blogs})
 
 
 })
-router.get("/single-blog", async(req, res) => {
-    res.render("single_blog")
+router.get("/blog/:slug", async(req, res) => {
+
+  var {slug} = req.params
+
+ var post =  await Post.findOne({slug})
+
+
+
+    res.render("single_blog", {
+      post
+    })
 })
 
 
-// admin routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * 
+
+
+
+
+
+
+
+ ADMIN ROUTES!!!!!
+ */
 router.get("/admin-panel", isLoggedIn, async(req, res) => {
 
   var post_length = await (await Post.find()).length
@@ -152,7 +186,7 @@ router.get("/admin-panel", isLoggedIn, async(req, res) => {
       published
     })
 })
-router.get("/admin-panel/blogs", async(req, res) => {
+router.get("/admin-panel/blogs",isLoggedIn, async(req, res) => {
 
 
   const { page = 1} = req.query;
@@ -178,7 +212,7 @@ router.get("/admin-panel/blogs", async(req, res) => {
     })
 })
 
-router.get("/admin-panel/create-blog", async(req, res) => {
+router.get("/admin-panel/create-blog", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   var categories = await BlogCategory.find()
@@ -192,7 +226,7 @@ router.get("/admin-panel/create-blog", async(req, res) => {
       successMessage: req.flash("success"),
     })
 })
-router.post("/admin-panel/create-blog", async(req, res) => {
+router.post("/admin-panel/create-blog", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 
@@ -215,7 +249,7 @@ req.flash("error" , "Please enter all fields")
 
 
 // publish blog
-router.put("/admin-panel/:id/publish", async(req, res) => {
+router.put("/admin-panel/:id/publish", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
@@ -240,7 +274,7 @@ router.put("/admin-panel/:id/publish", async(req, res) => {
 
 })
 // Un publish blog
-router.put("/admin-panel/:id/unpublish", async(req, res) => {
+router.put("/admin-panel/:id/unpublish", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
@@ -265,7 +299,7 @@ router.put("/admin-panel/:id/unpublish", async(req, res) => {
 
 })
 
-router.post("/admin-panel/:id/delete", async(req, res) => {
+router.post("/admin-panel/:id/delete", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
@@ -288,7 +322,7 @@ router.post("/admin-panel/:id/delete", async(req, res) => {
 
 
 
-router.post("/admin-panel/create-category", async(req, res) => {
+router.post("/admin-panel/create-category", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 var {category_name} = req.body
@@ -320,7 +354,7 @@ if(!category_name){
 
 })
 
-router.get("/admin-panel/create-category", async(req, res) => {
+router.get("/admin-panel/create-category", isLoggedIn, async(req, res) => {
  
 var all_categories = await BlogCategory.find()
 
@@ -358,7 +392,7 @@ router.post('/admin-panel/upload_image', function (req, res) {
 
 
 // downloadables
-router.get('/admin-panel/downloadables', async (req, res) => {
+router.get('/admin-panel/downloadables', isLoggedIn, async (req, res) => {
 
 
   const { page = 1} = req.query;
@@ -386,7 +420,7 @@ router.get('/admin-panel/downloadables', async (req, res) => {
 
 
 // downloadables
-router.get('/admin-panel/create-downloadable', async (req, res) => {
+router.get('/admin-panel/create-downloadable', isLoggedIn, async (req, res) => {
 
 
   var categories = await BlogCategory.find()
@@ -400,7 +434,7 @@ router.get('/admin-panel/create-downloadable', async (req, res) => {
 });
 
 
-router.post("/admin-panel/create-downloadable", async(req, res) => {
+router.post("/admin-panel/create-downloadable", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 
@@ -430,7 +464,7 @@ req.flash("error" , "Please enter all fields")
 
 // downloadables publish
 // publish blog
-router.put("/admin-panel/downloadable/:id/publish", async(req, res) => {
+router.put("/admin-panel/downloadable/:id/publish", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
@@ -455,7 +489,7 @@ router.put("/admin-panel/downloadable/:id/publish", async(req, res) => {
 
 })
 // Un publish downloadable
-router.put("/admin-panel/downloadable/:id/unpublish", async(req, res) => {
+router.put("/admin-panel/downloadable/:id/unpublish", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
@@ -479,7 +513,7 @@ router.put("/admin-panel/downloadable/:id/unpublish", async(req, res) => {
   }
 
 })
-router.post("/admin-panel/downloadable/:id/delete", async(req, res) => {
+router.post("/admin-panel/downloadable/:id/delete", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
   try {
