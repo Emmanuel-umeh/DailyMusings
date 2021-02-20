@@ -174,12 +174,27 @@ router.get("/blog/:slug", async(req, res) => {
 
   var {slug} = req.params
 
- var post =  await Post.findOne({slug})
+  
+  var popular_posts = await ( await Post.find() .populate("category").sort({
+    views : -1
+  })).slice(0,3)
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+  var views = (await Post.findOne({slug})).views
+
+  console.log({views})
+ var post =  await Post.findOneAndUpdate({slug}, {
+   $set:{
+     views: views+1
+   }
+ },{new : true}).populate("category")
 
 
 
     res.render("single_blog", {
-      post
+      post,
+       categories, moment,
+       popular_posts
     })
 })
 
