@@ -13,43 +13,43 @@ const Post = require('../models/Post');
 const moment = require("moment")
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
-const passport = require("passport");
+const passport = require("../config/passport");
 const isLoggedIn = require('../middleware/loggedIn');
 
 
 // auth handles
-router.get("/signup",csrfProtection,function (req, res) {
-  console.log(req);
-  // render the page and pass in any flash data if it exists
-  res.render("user/signup.ejs", {
-    message: req.flash("signupMessage"),
-    title: "Sign-Up",
-    csrfToken: req.csrfToken()
-  });
-});
-router.post(
-  "/signup",
-  csrfProtection,
-  // checkPasswords,
-  passport.authenticate("admin-signup", {
-    successRedirect : '/admin', // redirect to the secure profile section
-    failureRedirect: "/admin/signup", // redirect back to the signup page if there is an error
-    failureFlash: true, // allow flash messages
-  }),
-  function (req, res) {
-    // WHEN THE USER SIGNS UP SUCCESSFULLY
-    // console.log("")
-    // pusher.trigger("cryptoHeaven", "signedUp", {
-    //   message: "Signed Up Successfully",
-    // });
-    // const user =  User.findByIdAndUpdate(req.user._id, {
-    //   $set:{
-    //     "isAdmin":truw
-    //   }
-    // })
-    res.redirect("/admin");
-  }
-);
+// router.get("/signup",csrfProtection,function (req, res) {
+//   console.log(req);
+//   // render the page and pass in any flash data if it exists
+//   res.render("signup.ejs", {
+//     message: req.flash("signupMessage"),
+//     title: "Sign-Up",
+//     csrfToken: req.csrfToken()
+//   });
+// });
+// router.post(
+//   "/signup",
+//   csrfProtection,
+//   // checkPasswords,
+//   passport.authenticate("admin-signup", {
+//     successRedirect : '/admin', // redirect to the secure profile section
+//     failureRedirect: "/admin/signup", // redirect back to the signup page if there is an error
+//     failureFlash: true, // allow flash messages
+//   }),
+//   function (req, res) {
+//     // WHEN THE USER SIGNS UP SUCCESSFULLY
+//     // console.log("")
+//     // pusher.trigger("cryptoHeaven", "signedUp", {
+//     //   message: "Signed Up Successfully",
+//     // });
+//     // const user =  User.findByIdAndUpdate(req.user._id, {
+//     //   $set:{
+//     //     "isAdmin":truw
+//     //   }
+//     // })
+//     res.redirect("/admin");
+//   }
+// );
 
 
 router.get("/login", csrfProtection, function (req, res) {

@@ -54,33 +54,6 @@
         </div>
     
       </header>
-
-                  
-      <% if (message.length > 0) { %>
-        <!-- <%= message %> -->
-         <!-- <%= message %> -->
-         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong class="text-center">
-              <%= message %></strong> 
-              
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    <% } %> 
-    <% if (successMessage.length > 0) { %>
-        <!-- <%= message %> -->
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong class="text-center">
-                <%= successMessage %></strong> 
-                
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-    <% } %>
-
-
       <div class="global-container" style="margin-top: 4%;">
 	<div class="card login-form">
 	<div class="card-body">
@@ -88,8 +61,8 @@
 		<div class="card-text">
 			<!--
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
-            <center>                <form  method="POST"  action="/login" enctype="application/json">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <center>
+                <form  method="POST"  action="/admin-panel/login" enctype="application/json">
                     <!-- to error: add class "has-danger" -->
                     <div class="form-group col-md-6">
                         <label for="exampleInputEmail1">Email address</label>
