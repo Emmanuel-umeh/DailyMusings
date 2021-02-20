@@ -85,7 +85,47 @@ router.post(
 
 
 router.get("/", async(req, res) => {
-    res.render("index")
+
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,3)
+
+
+  var popular_posts = await ( await Post.find() .populate("category").sort({
+    views : -1
+  })).slice(0,3)
+
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+  
+  
+  const { page = 1} = req.query;
+  const limit = 5
+ 
+  const posts = await Post.find()
+                          .limit(limit * 1)
+                          .skip((page - 1) * limit)
+                          .populate("category")
+                          .exec()
+
+                          const count = await Post.countDocuments();
+console.log({posts})
+          
+  const toalPages = Math.ceil(count / limit) 
+  console.log("TOTAL PAGES", toalPages)
+
+
+
+    res.render("index", {
+      recent_posts,
+      popular_posts,
+
+      posts,
+      moment,
+      categories,
+      toalPages,
+      currentPage: page,
+    })
 })
 router.get("/about", async(req, res) => {
     res.render("about")

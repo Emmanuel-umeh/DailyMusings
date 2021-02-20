@@ -6,54 +6,31 @@
       <div class="col-md-12">
 
         <div class="owl-carousel owl-theme home-slider">
+
+
+
+
+          <%recent_posts.forEach((post) => {%>
           <div>
-            <a href="/blog" class="a-block d-flex align-items-center height-lg" style="background-image: url('/images/img_1.jpg'); ">
+            <a href="/blog/<%=post.slug %>" class="a-block d-flex align-items-center height-lg" style="background-image: url('/images/img_1.jpg'); ">
               <div class="text half-to-full">
-                <span class="category mb-5">Food</span>
+                <span class="category mb-5"><%=  post.category.category_name %></span>
                 <div class="post-meta">
                   
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                  <span class="author mr-2"><img src="/images/victor.jpeg" alt="dailymusings"> dailymusings</span>&bullet;
+                  <span class="mr-2"><%= moment(post.dateCreated).format('MMM Do YY') %> </span> &bullet;
+                  <span class="ml-2"><span class="fa fa-comments"></span><%= post.comments.length %></span>
                   
                 </div>
-                <h3>How to get connected to Christ</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
+                <h3> <%= post.title %></h3>
+                <div id="preview" class="fr-view">
+                  
+                  <p><%= post.content %></p></div>
               </div>
             </a>
           </div>
-          <div>
-            <a href="/blog" class="a-block d-flex align-items-center height-lg" style="background-image: url('/images/img_2.jpg'); ">
-              <div class="text half-to-full">
-                <span class="category mb-5">Travel</span>
-                <div class="post-meta">
-                  
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                  
-                </div>
-                <h3>How to get connected to Christ</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="/blog" class="a-block d-flex align-items-center height-lg" style="background-image: url('/images/img_3.jpg'); ">
-              <div class="text half-to-full">
-                <span class="category mb-5">Sports</span>
-                <div class="post-meta">
-                  
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                  
-                </div>
-                <h3>How to get connected to Christ</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
-              </div>
-            </a>
-          </div>
+          <% })%>
+         
         </div>
         
       </div>
@@ -75,130 +52,92 @@
     <div class="row blog-entries">
       <div class="col-md-12 col-lg-8 main-content">
         <div class="row">
+
+
+
+          <%posts.forEach((post) => {%>
           <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
+            <a href="/blog/<%=post.slug %>" class="blog-entry element-animate" data-animate-effect="fadeIn">
               <img src="/images/img_5.jpg" alt="Image placeholder">
               <div class="blog-content-body">
                 <div class="post-meta">
                   <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                  <span class="mr-2"><%= moment(post.dateCreated).format('MMM Do YY') %> </span> &bullet;
+                  <span class="ml-2"><span class="fa fa-comments"></span> <%= post.comments.length %></span>
                 </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_6.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
+                <h2> <%= post.title %></h2>
               </div>
             </a>
           </div>
 
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_7.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_8.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_9.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_10.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_11.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a href="/blog" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_12.jpg" alt="Image placeholder">
-              <div class="blog-content-body">
-                <div class="post-meta">
-                  <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
-                  <span class="mr-2">March 15, 2021 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h2>How to get connected to Christ</h2>
-              </div>
-            </a>
-          </div>
+          <% })%>
         </div>
 
+    
         <div class="row mt-5">
           <div class="col-md-12 text-center">
             <nav aria-label="Page navigation" class="text-center">
               <ul class="pagination">
-                <li class="page-item  active"><a class="page-link" href="#">&lt;</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-              </ul>
-            </nav>
-          </div>
+              <li class="page-item <%= Number(currentPage) == 1 ? 'disabled' : null %>">
+                <a class="page-link" href="/blog?page=<%= Number(currentPage) -1 %>" tabindex="-1">
+                  <i class="nc-icon nc-minimal-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <!-- <% for (var i =1; i <=toalPages;  i++ ) { %>
+                <li class="page-item <% if (currentPage == i) { %> <%= 'active' %> <% } %>">
+                    <a class="page-link " href="/blog?page=<%= i %>"><%= i %></a>
+                  </li>   
+                <%#  will output the numbers 1-10 %>
+                <% } %> -->
+
+
+                <% if (toalPages > 0) { %>
+                  <!-- <ul class="pagination text-center"> -->
+                      <!-- <% if (currentPage == 1) { %>
+                          <li class="disabled"><a>First</a></li>
+                      <% } else { %>
+                          <li><a href="/products/1">First</a></li>
+                      <% } %> -->
+                      <% var i = (Number(currentPage) > 3 ? Number(currentPage) - 1 : 1) %>
+                      <% if (i !== 1) { %>
+                          <li class="disabled"><a>...</a></li>
+                      <% } %>
+                      <% for (; i <= (Number(currentPage) + 1) && i <= toalPages; i++) { %>
+                          <% if (i == currentPage) { %>
+                            <li class="page-item active">
+                              <a class="page-link " href="/blog?page=<%= i %>"><%= i %></a>
+                            </li>   
+                          <% } else { %>
+                            <li class="page-item ">
+                              <a class="page-link " href="/blog?page=<%= i %>"><%= i %></a>
+                            </li>   
+                          <% } %>
+                          <% if (i == Number(currentPage) + 1 && i < toalPages) { %>
+                            <li class="page-item">
+                              <a class="page-link " href="/blog?page=<%= toalPages %>">...</a>
+                            </li>   
+                          <% } %>
+                      <% } %>
+                 
+                  <!-- </ul> -->
+              <% } %>
+    
+
+              <% if (currentPage != toalPages) { %>
+              <li class="page-item">
+                <a class="page-link" href="/blog?page=<%= Number(currentPage) +1 %>" tabindex="1">
+                  <i class="nc-icon nc-align-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+
+              <% } %>
+            </ul>
+          </nav>
         </div>
+      </div>
+
 
 
         
@@ -229,39 +168,20 @@
           <h3 class="heading">Popular Posts</h3>
           <div class="post-entry-sidebar">
             <ul>
+
+              <%popular_posts.forEach((post) => {%>
               <li>
-                <a href="">
+                <a href="/blog/<%=post.slug %>">
                   <img src="/images/img_2.jpg" alt="Image placeholder" class="mr-4">
                   <div class="text">
-                    <h4>How to get connected to Christ</h4>
+                    <h4><%= post.title %></h4>
                     <div class="post-meta">
-                      <span class="mr-2">March 15, 2021 </span>
+                      <span class="mr-2"><%= moment(post.dateCreated).format('MMM Do YY') %>  </span>
                     </div>
                   </div>
                 </a>
               </li>
-              <li>
-                <a href="">
-                  <img src="/images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                  <div class="text">
-                    <h4>How to get connected to Christ</h4>
-                    <div class="post-meta">
-                      <span class="mr-2">March 15, 2021 </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <img src="/images/img_12.jpg" alt="Image placeholder" class="mr-4">
-                  <div class="text">
-                    <h4>How to get connected to Christ</h4>
-                    <div class="post-meta">
-                      <span class="mr-2">March 15, 2021 </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
+              <% })%>
             </ul>
           </div>
         </div>
@@ -270,7 +190,7 @@
  
         <!-- END sidebar-box -->
 
-        <div class="sidebar-box">
+        <!-- <div class="sidebar-box">
           <h3 class="heading">Tags</h3>
           <ul class="tags">
             <li><a href="#">Travel</a></li>
@@ -287,7 +207,7 @@
             <li><a href="#">Freelancing</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <!-- END sidebar -->
 
     </div>
