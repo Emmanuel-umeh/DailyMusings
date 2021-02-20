@@ -4,9 +4,8 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var User            = require('../model/User');
-const Referred = require("../model/Referred");
-const Notification = require("../model/Notifications")
+var User            = require("../models/Admin");
+
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -164,13 +163,7 @@ module.exports = function(passport) {
 
             // all is well, return successful user
 
-            const notifData = new Notification({
-                title:"LOGGED IN",
-                ownerID: user._id,
-                message: `just logged in`,
-              });
-              notifData.save();
-            //   if(user.isAdmin) req.res.redirect("/admin/")
+           
             return done(null, user);
         });
 

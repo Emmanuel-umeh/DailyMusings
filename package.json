@@ -21,6 +21,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.11.16",
     "morgan": "^1.10.0",
+    "passport": "^0.4.1",
     "request": "^2.88.2",
     "session": "^0.1.0",
     "slugify": "^1.4.6",

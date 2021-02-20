@@ -14,6 +14,7 @@ const moment = require("moment")
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
 const passport = require("passport");
+const isLoggedIn = require('../middleware/loggedIn');
 
 
 // auth handles
@@ -50,6 +51,32 @@ router.post(
   }
 );
 
+
+router.get("/login", csrfProtection, function (req, res) {
+  // console.log("Referral ID",req.query['referral'])
+  // render the page and pass in any flash data if it exists
+  return res.render("login", {
+    message: req.flash("loginMessage"),
+    successMessage : req.flash("successMessage"),
+    title: "Log-In",
+    csrfToken: req.csrfToken(),
+  });
+});
+
+router.post(
+  "/login",
+  csrfProtection,
+  passport.authenticate("local-login", {
+    // successRedirect: "/dashboard", // redirect to the secure profile section
+    failureRedirect: "/login", // redirect back to the signup page if there is an error
+    failureFlash: true, // allow flash messages
+  }),
+  function (req, res) {
+  
+      res.redirect("/admin-panel");
+    
+  }
+);
 //auth handl;es end
 
 
@@ -106,7 +133,7 @@ router.get("/single-blog", async(req, res) => {
 
 
 // admin routes
-router.get("/admin-panel", async(req, res) => {
+router.get("/admin-panel", isLoggedIn, async(req, res) => {
 
   var post_length = await (await Post.find()).length
   var posts = await Post.find()
