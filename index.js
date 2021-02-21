@@ -56,10 +56,7 @@ try{
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); //
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({
-    extended: true,
-    limit : "50mb"
-  }));
+  app.use(bodyParser.urlencoded({ extended: false }));
   /** VIEWS CONFIGURATION */
   /** SERVING PUBLIC FILES */
   app.use(express.static(path.join(__dirname, "public")));

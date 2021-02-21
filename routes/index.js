@@ -20,17 +20,56 @@ let passport
 
 passport = require('passport');
 require('../config/passport')(passport);
-
+const multer = require("multer")
+// var upload = multer({ dest: 'uploads/' })
 var cloudinary = require('cloudinary').v2;
 
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 // cloudinary configuration
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
+  cloud_name: "dailymusings",
+  api_key: "727572747612253",
+  api_secret: "pKKrw6zilXbGUF-Owfrx2nW8s0U"
+  // cloud_name: process.env.CLOUD_NAME,
+  // api_key: process.env.API_KEY,
+  // api_secret: process.env.API_SECRET
 });
 
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  // params: {
+  //   folder: "public",
+  //   // fileFilter,
+  //   // format: async (req, file) => 'img', // supports promises as well
+  //   public_id: (req, file) => {
+  //     // console.log(req.body)
+  //     `blog-image-${Date.now()}`;
+  //   },
+  //   resource_type: "image",
+  // },
+
+  allowedFormats: ["jpg", "png", "jpeg"],
+transformation: [{ width: 500, height: 500, crop: "limit" }]
+
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (
+    file.mimetype == "image/png" ||
+    file.mimetype == "image/jpeg" ||
+    file.mimetype == "image/mkv" ||
+    file.mimetype == "image/jpg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+
+const parser = multer({ storage: storage });
 // auth handles
 // router.get("/signup",csrfProtection,function (req, res) {
 //   console.log(req);
@@ -408,9 +447,17 @@ router.get("/admin-panel/create-blog", isLoggedIn, async(req, res) => {
       successMessage: req.flash("success"),
     })
 })
-router.post("/admin-panel/create-blog", isLoggedIn, async(req, res) => {
+router.post("/admin-panel/create-blog", isLoggedIn,  parser.single("file"), async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
+
+  if(!req.file.path){
+    
+    req.flash("error", "Could not upload this image. please try another")
+    return res.redirect("/admin-panel/create-blog")
+  }
+
+  const cover_photo = req.file.path
 
   const {title, category,content  } = req.body
 
@@ -421,7 +468,7 @@ req.flash("error" , "Please enter all fields")
 
 
   var new_post = new Post({
-    title,category, content
+    title,category, content, cover_photo
   })
   // console.log(title, category, content)
   await new_post.save()
@@ -555,25 +602,33 @@ console.log({all_categories})
 
 
 
-router.post('/admin-panel/upload_image', function (req, res) {
+router.post('/admin-panel/upload_content_image', parser.single("file"),  (req, res)=> {
 
 
-  console.log( "!!!!!!!!!!!!!!!!!",req.body)
 
-  var {image} = req.body
+
+  if(!req.file.path){
+
+    req.flash("error", "Could not upload this image. please try another")
+    return res.redirect("/admin-panel/create-blog")
+  }
+  console.log( "file files!!!!!!!!!!!!!!!!!", req.file.path)
+
+  console.log (" req body!!!!!!! " , res.data)
+res.json("s")
 
   // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-  cloudinary.uploader.upload(image, function(error, result) { 
+  // cloudinary.uploader.upload(image, function(error, result) { 
     
-    if(error){
-      console.log({error})
-      return res.redirect("/admin-panel")
-    }
+  //   if(error){
+  //     console.log({error})
+  //     return res.redirect("/admin-panel")
+  //   }
     
     
-    console.log({result}) });
+  //   console.log({result}) });
  
-    return res.redirect("/admin-panel-success")
+  //   return res.redirect("/admin-panel-success")
   // Store image.
   // FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
   //   // Return data.

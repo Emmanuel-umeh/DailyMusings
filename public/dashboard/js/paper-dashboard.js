@@ -44,6 +44,8 @@ seq2 = 0, delays2 = 80, durations2 = 500;
 
 $(document).ready(function() {
 
+  
+
   if ($('.full-screen-map').length == 0 && $('.bd-docs').length == 0) {
     // On click navbar-collapse the menu will be white not transparent
     $('.collapse').on('show.bs.collapse', function() {
@@ -81,6 +83,8 @@ $(document).ready(function() {
       offText: data_off_label
     });
   });
+
+
 });
 
 $(document).on('click', '.navbar-toggle', function() {
@@ -185,6 +189,8 @@ paperDashboard = {
 
 };
 
+
+
 function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),
@@ -196,3 +202,17 @@ function hexToRGB(hex, alpha) {
     return "rgb(" + r + ", " + g + ", " + b + ")";
   }
 }
+
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+          $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+          $('#imagePreview').hide();
+          $('#imagePreview').fadeIn(650);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
