@@ -221,6 +221,9 @@ router.get("/blog/:slug", async(req, res) => {
 
   var {slug} = req.params
 
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
   
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
@@ -252,6 +255,7 @@ router.get("/blog/:slug", async(req, res) => {
        popular_posts,
        comments,
        similar_blogs,
+       recent_posts,
       //  csrfToken: req.csrfToken(),
 
        message: req.flash("error"),
