@@ -13,12 +13,12 @@
           <div class="row mb-5 mt-5">
 
             <div class="col-md-12">
-
+        
 
               <%blogs && blogs.map((blog, key) => {%>
               <div class="post-entry-horzontal">
                 <a href="/blog/<%= blog.slug %>">
-                  <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url(images/img_10.jpg);"></div>
+                  <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url('<%=blog.cover_photo %>');"></div>
                   <span class="text">
                     <div class="post-meta">
                       <span class="author mr-2"><img src="images/victor.jpeg" alt="DailyMusings"> DailyMusings</span>&bullet;
@@ -144,7 +144,7 @@
  
           <!-- END sidebar-box -->
 
-          <div class="sidebar-box">
+          <!-- <div class="sidebar-box">
             <h3 class="heading">Tags</h3>
             <ul class="tags">
               <li><a href="#">Travel</a></li>
@@ -160,7 +160,7 @@
               <li><a href="#">Business</a></li>
               <li><a href="#">Freelancing</a></li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <!-- END sidebar -->
 

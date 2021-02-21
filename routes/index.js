@@ -602,20 +602,14 @@ console.log({all_categories})
 
 
 
-router.post('/admin-panel/upload_content_image', parser.single("file"),  (req, res)=> {
+router.post('/admin-panel/upload_image', parser.single("file"),  (req, res)=> {
 
 
-
-
-  if(!req.file.path){
-
-    req.flash("error", "Could not upload this image. please try another")
-    return res.redirect("/admin-panel/create-blog")
+  var data = {
+    link : req.file.path
   }
-  console.log( "file files!!!!!!!!!!!!!!!!!", req.file.path)
 
-  console.log (" req body!!!!!!! " , res.data)
-res.json("s")
+  return res.send(data);
 
   // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
   // cloudinary.uploader.upload(image, function(error, result) { 

@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <h3>About Us</h3>
         <p class="mb-4">
-          <img src="/images/victor.jpeg" alt="Image placeholder" class="img-fluid">
+          <img src="/images/victor2.jpeg" alt="Image placeholder" class="img-fluid">
         </p>
 
 
@@ -24,7 +24,7 @@
           <%recent_posts.forEach((post) => {%>
                 <li>
                   <a href="/blog/<%= post.slug%> ">
-                    <img src="<%=post.cover_photo %>" alt="Image placeholder" class="mr-4">
+                    <img src="<%=post.cover_photo %>" style="width: 80px; height: 80px;" alt="Image placeholder" class="mr-4">
                     <div class="text">
                       <h4> <%= post.title %></h4>
                       <div class="post-meta">
