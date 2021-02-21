@@ -20,6 +20,17 @@ let passport
 
 passport = require('passport');
 require('../config/passport')(passport);
+
+var cloudinary = require('cloudinary').v2;
+
+
+// cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
+
 // auth handles
 // router.get("/signup",csrfProtection,function (req, res) {
 //   console.log(req);
@@ -547,20 +558,22 @@ console.log({all_categories})
 router.post('/admin-panel/upload_image', function (req, res) {
 
 
-  // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
+  console.log( request.body.image)
 
+  // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
+  // cloudinary.uploader.upload("my_picture.jpg", function(error, result) { console.log(result) });
   // Store image.
-  FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
-    // Return data.
-    if (err) {
-      console.log({err})
-      return res.send(JSON.stringify(err));
-    }
+  // FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
+  //   // Return data.
+  //   if (err) {
+  //     console.log({err})
+  //     return res.send(JSON.stringify(err));
+  //   }
     
 
-    console.log(data)
-    res.send(data);
-  });
+  //   console.log(data)
+  //   res.send(data);
+  // });
 });
 
 
