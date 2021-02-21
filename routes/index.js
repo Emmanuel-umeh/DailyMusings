@@ -561,7 +561,17 @@ router.post('/admin-panel/upload_image', function (req, res) {
   console.log( request.body.image)
 
   // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-  // cloudinary.uploader.upload("my_picture.jpg", function(error, result) { console.log(result) });
+  cloudinary.uploader.upload("my_picture.jpg", function(error, result) { 
+    
+    if(error){
+      console.log({error})
+      return res.redirect("/admin-panel")
+    }
+    
+    
+    console.log(result) });
+
+    return res.redirect("/admin-panel-success")
   // Store image.
   // FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
   //   // Return data.
