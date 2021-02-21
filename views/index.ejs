@@ -12,7 +12,7 @@
 
           <%recent_posts.forEach((post) => {%>
           <div>
-            <a href="/blog/<%=post.slug %>" class="a-block d-flex align-items-center height-lg" style="background-image: url('/images/img_1.jpg'); ">
+            <a href="/blog/<%=post.slug %>" class="a-block d-flex align-items-center height-lg" style="background-image: url('<%=post.cover_photo %>'); ">
               <div class="text half-to-full">
                 <span class="category mb-5"><%=  post.category.category_name %></span>
                 <div class="post-meta">
@@ -25,7 +25,7 @@
                 <h3> <%= post.title %></h3>
                 <div id="preview" class="fr-view">
                   
-                  <p><%= post.content %></p></div>
+                  <p><%= post.content.slice(0,70) %>....</p></div>
               </div>
             </a>
           </div>
@@ -58,7 +58,7 @@
           <%posts.forEach((post) => {%>
           <div class="col-md-6">
             <a href="/blog/<%=post.slug %>" class="blog-entry element-animate" data-animate-effect="fadeIn">
-              <img src="/images/img_5.jpg" alt="Image placeholder">
+              <img src="<%=post.cover_photo %>" alt="Image placeholder">
               <div class="blog-content-body">
                 <div class="post-meta">
                   <span class="author mr-2"><img src="/images/person_1.jpg" alt="dailymusings"> dailymusings</span>&bullet;
