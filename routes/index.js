@@ -102,7 +102,7 @@ router.get("/", async(req, res) => {
 
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
-  })).slice(0,3)
+  })).slice(0,4)
 
   var categories = await (await BlogCategory.find()).slice(0,10)
 
@@ -147,7 +147,7 @@ router.get("/about", async(req, res) => {
    
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
-  })).slice(0,3)
+  })).slice(0,4)
 
     res.render("about", {
       recent_posts,
@@ -179,7 +179,7 @@ router.get("/contact", async(req, res) => {
    
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
-  })).slice(0,3)
+  })).slice(0,4)
     res.render("contact",{
       recent_posts,
       moment,
@@ -194,7 +194,9 @@ router.get("/blog", async(req, res) => {
   var recent_posts = await ( await Post.find() .where('status').equals("published").populate("category").sort({
     dateCreated : -1
   })).slice(0,4)
-
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
 
   var categories = await (await BlogCategory.find()).slice(0,10)
   
@@ -221,7 +223,8 @@ console.log({blogs})
       currentPage: page,
       moment,
       recent_posts,
-      categories
+      categories,
+      popular_posts
     })
 
 
@@ -237,7 +240,7 @@ router.get("/blog/:slug", async(req, res) => {
   
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
-  })).slice(0,3)
+  })).slice(0,4)
   var categories = await (await BlogCategory.find()).slice(0,10)
 
   var views = (await Post.findOne({slug})).views
@@ -542,6 +545,9 @@ console.log({all_categories})
 
 
 router.post('/admin-panel/upload_image', function (req, res) {
+
+
+  // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
 
   // Store image.
   FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
