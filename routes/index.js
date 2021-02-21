@@ -558,10 +558,12 @@ console.log({all_categories})
 router.post('/admin-panel/upload_image', function (req, res) {
 
 
-  console.log( request.body.image)
+  console.log( "!!!!!!!!!!!!!!!!!",req.body)
+
+  var {image} = req.body
 
   // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-  cloudinary.uploader.upload("my_picture.jpg", function(error, result) { 
+  cloudinary.uploader.upload(image, function(error, result) { 
     
     if(error){
       console.log({error})
@@ -569,8 +571,8 @@ router.post('/admin-panel/upload_image', function (req, res) {
     }
     
     
-    console.log(result) });
-
+    console.log({result}) });
+ 
     return res.redirect("/admin-panel-success")
   // Store image.
   // FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {

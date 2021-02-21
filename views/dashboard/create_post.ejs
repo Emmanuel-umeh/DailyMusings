@@ -54,7 +54,8 @@
                   </div>
             <% } %>
               <div class="card-body">
-                <form  method="POST"  action="/admin-panel/create-blog" enctype="application/json">
+                <!-- <form  method="POST"  action="/admin-panel/create-blog" enctype="application/json"> -->
+                  <form  method="POST"  action="/admin-panel/upload_image" enctype="application/json">
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
@@ -85,7 +86,7 @@
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Blog Cover Image</label>
-                        <input type="file" class="form-control" placeholder="Click to select image">
+                        <input type="file" name="image" class="form-control" placeholder="Click to select image">
                       </div>
                     </div>
                   </div>
