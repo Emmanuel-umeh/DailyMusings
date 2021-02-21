@@ -56,7 +56,13 @@ require('../config/passport')(passport);
 // );
 
 
-router.get("/login", csrfProtection, function (req, res) {
+router.get("/login", csrfProtection, async (req, res)=> {
+
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+
   // console.log("Referral ID",req.query['referral'])
   // render the page and pass in any flash data if it exists
   return res.render("login", {
@@ -64,6 +70,7 @@ router.get("/login", csrfProtection, function (req, res) {
     successMessage : req.flash("successMessage"),
     title: "Log-In",
     csrfToken: req.csrfToken(),
+    recent_posts
   });
 });
 
@@ -89,7 +96,7 @@ router.get("/", async(req, res) => {
 
   var recent_posts = await ( await Post.find() .populate("category").sort({
     dateCreated : -1
-  })).slice(0,3)
+  })).slice(0,4)
 
 
   var popular_posts = await ( await Post.find() .populate("category").sort({
@@ -129,25 +136,62 @@ console.log({posts})
     })
 })
 router.get("/about", async(req, res) => {
-    res.render("about")
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+  
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+   
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,3)
+
+    res.render("about", {
+      recent_posts,
+      moment  ,
+      categories,
+      popular_posts
+    })
 })
 
 router.get("/gallery", async(req, res) => {
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+
     res.render("gallery")
 })
 
 router.get("/contact", async(req, res) => {
-    res.render("contact")
+
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+
+    res.render("contact",{
+      recent_posts,
+      moment
+    })
 })
 router.get("/blog", async(req, res) => {
 
 
 
+  var recent_posts = await ( await Post.find() .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+
+  var categories = await (await BlogCategory.find()).slice(0,10)
   
   const { page = 1} = req.query;
   const limit = 5
  
-  const blogs = await Post.find()
+  const blogs = await Post.find().where('status').equals("published")
                           .limit(limit * 1)
                           .skip((page - 1) * limit)
                           .populate("category")
@@ -165,7 +209,9 @@ console.log({blogs})
       successMessage: req.flash("success"),
       toalPages,
       currentPage: page,
-      moment
+      moment,
+      recent_posts,
+      categories
     })
 
 
@@ -176,7 +222,7 @@ router.get("/blog/:slug", async(req, res) => {
   var {slug} = req.params
 
   
-  var popular_posts = await ( await Post.find() .populate("category").sort({
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
   })).slice(0,3)
   var categories = await (await BlogCategory.find()).slice(0,10)
@@ -191,16 +237,21 @@ router.get("/blog/:slug", async(req, res) => {
  },{new : true}).populate("category").populate("comments")
 
 
- var comments = post
+ var comments = post.comments
 
 
  console.log({comments})
 
+ var similar_blogs = await Post.find().where('status').equals("published").where("category").equals(post.category).populate("category")
+
+
+ console.log({similar_blogs})
     res.render("single_blog", {
       post,
        categories, moment,
        popular_posts,
        comments,
+       similar_blogs,
       //  csrfToken: req.csrfToken(),
 
        message: req.flash("error"),

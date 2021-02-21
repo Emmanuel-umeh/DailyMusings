@@ -15,42 +15,22 @@
             <h3>Latest Post</h3>
             <div class="post-entry-sidebar">
               <ul>
+
+                
+          <%recent_posts.forEach((post) => {%>
                 <li>
-                  <a href="">
+                  <a href="/blog/<%= post.slug%> ">
                     <img src="/images/img_6.jpg" alt="Image placeholder" class="mr-4">
                     <div class="text">
-                      <h4>How to get into Christ</h4>
+                      <h4> <%= post.title %></h4>
                       <div class="post-meta">
-                        <span class="mr-2">March 15, 2020 </span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        <span class="mr-2"><%= moment(post.dateCreated).fromNow() %>   </span> &bullet;
+                        <span class="ml-2"><span class="fa fa-comments"></span><%= post.comments.length%>  </span>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <img src="/images/img_3.jpg" alt="Image placeholder" class="mr-4">
-                    <div class="text">
-                      <h4>How to get into Christ</h4>
-                      <div class="post-meta">
-                        <span class="mr-2">March 15, 2020 </span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="/images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                    <div class="text">
-                      <h4>How to get into Christ</h4>
-                      <div class="post-meta">
-                        <span class="mr-2">March 15, 2020 </span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
+                <% })%>
               </ul>
             </div>
           </div>
@@ -61,11 +41,11 @@
             <div class="mb-5">
               <h3>Quick Links</h3>
               <ul class="list-unstyled">
-                <li><a href="#">About Us</a></li>
+                <li><a href="/about">About Us</a></li>
                 <!-- <li><a href="#">Travel</a></li> -->
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">Categories</a></li>
+                <li><a href="#/blog">Blog</a></li>
+                <li><a href="#/contact">Contact</a></li>
+                <li><a href="#">Downloadable Material</a></li>
               </ul>
             </div>
             
