@@ -27,6 +27,10 @@ const postSchema = new mongoose.Schema({
         type:String,
         default:"draft"
     },
+    cover_photo:{
+        type:String,
+        default: "https://images.pexels.com/photos/2774570/pexels-photo-2774570.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+    },
     comments:[{
         type:Schema.Types.ObjectId,
         ref:'Comment'
