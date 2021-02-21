@@ -173,6 +173,9 @@ router.get("/contact", async(req, res) => {
   })).slice(0,4)
 
 
+
+  var categories = await (await BlogCategory.find()).slice(0,10)
+  
    
   var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     views : -1
@@ -180,7 +183,8 @@ router.get("/contact", async(req, res) => {
     res.render("contact",{
       recent_posts,
       moment,
-      popular_posts
+      popular_posts,
+      categories
     })
 })
 router.get("/blog", async(req, res) => {
