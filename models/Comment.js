@@ -19,6 +19,9 @@ const commentSchema = new mongoose.Schema({
     owner_name:{
         type:String
     },
+    email :{
+        type:String
+    },
 
     dateCreated:{
         type:Date,

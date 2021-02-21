@@ -38,15 +38,15 @@
           <h3 class="mb-5"> <%=post.comments.length%> Comments</h3>
           <ul class="comment-list">
 
-            <%comments && comments.map((comment, key) => {%>
+            <%post.comments && post.comments.map((comment, key) => {%>
             <li class="comment">
               <div class="vcard">
-                <img src="/images/person_1.jpg" alt="Image placeholder" />
+                <img src="https://p.kindpng.com/picc/s/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" alt="Image placeholder" />
               </div>
               <div class="comment-body">
                 <h3><%= comment.owner_name %></h3>
-                <div class="meta">moment(comment.dateCreated).fromNow()  </div>
-                <p>
+                <div class="meta">  <%= moment(comment.dateCreated).fromNow() %>  </div>
+                <p> 
                   <%= comment.content %>
                 </p>
                 <!-- <p><a href="#" class="reply rounded">Reply</a></p> -->
@@ -60,14 +60,42 @@
 
           <div class="comment-form-wrap pt-5">
             <h3 class="mb-5">Leave a comment</h3>
-            <form action="#" class="p-5 bg-light">
-              <div class="form-group">
+
+            <% if (message.length > 0) { %>
+              <!-- <%= message %> -->
+               <!-- <%= message %> -->
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong class="text-center">
+                    <%= message %></strong> 
+                    
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          <% } %> 
+          <% if (successMessage.length > 0) { %>
+              <!-- <%= message %> -->
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong class="text-center">
+                      <%= successMessage %></strong> 
+                      
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+          <% } %>
+      
+      
+            <form  method="POST"   class="p-5 bg-light" action="/blog/<%=post.slug%>/add-comment" enctype="application/json">
+
+            <!-- <form action="#" class="p-5 bg-light"> -->
+              <div class="form-group">     <form  method="POST"  action="/blog/<%=post.slug%>/add-comment" enctype="application/json">
                 <label for="name">Name *</label>
-                <input required type="text" class="form-control" id="name" />
+                <input required type="text" class="form-control1" name="owner_name" id="name" />
               </div>
               <div class="form-group">
                 <label for="email">Email *</label>
-                <input required type="email" class="form-control" id="email" />
+                <input name="email" type="email" class="form-control" id="email" required />
               </div>
               <div class="form-group">
                 <label for="website">Website</label>
@@ -77,7 +105,7 @@
               <div class="form-group">
                 <label for="message">Message</label>
                 <textarea
-                  name=""
+                  name="content"
                   id="message"
                   cols="30"
                   rows="10"

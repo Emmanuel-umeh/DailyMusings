@@ -191,15 +191,59 @@ router.get("/blog/:slug", async(req, res) => {
  },{new : true}).populate("category").populate("comments")
 
 
- var comments = post.comments
+ var comments = post
 
+
+ console.log({comments})
 
     res.render("single_blog", {
       post,
        categories, moment,
        popular_posts,
-       comments
+       comments,
+      //  csrfToken: req.csrfToken(),
+
+       message: req.flash("error"),
+       successMessage: req.flash("success"),
     })
+})
+
+
+
+
+router.post("/blog/:slug/add-comment", async(req, res) => {
+
+  var {slug} = req.params
+  const {owner_name, email,content } = req.body
+  if(!owner_name || !email || !content){
+
+    console.log("enter all fields")
+    req.flash("error", "Please fill all fields")
+    res.redirect(`/blog/${slug}`)
+  }
+
+  var post_id = (await Post.findOne({slug}))._id
+
+  var comment = new Comment({
+post : post_id,
+owner_name,email,content
+
+
+  })
+
+  console.log({comment})
+  var saved_comment = await comment.save()
+
+  await Post.findOneAndUpdate({slug},{
+    $push:{
+      comments : saved_comment._id 
+    }
+  })
+console.log("saved succesfully!!!")
+
+// req.flash("success", "commented succes")
+
+    res.redirect(`/blog/${slug}`)
 })
 
 
