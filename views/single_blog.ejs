@@ -20,11 +20,12 @@
         <a class="category mb-5" href="#"> <%=post.category.category_name%></a>
         <!-- <a class="category mb-5" href="#">Travel</a> -->
 
-        <div class="post-content-body fr-view " id="preview" >
+        <div class="fr-view post-content-body " id="preview" >
 
-          <%=post.content%>
+          <%-post.content%>
 
         </div>
+       
 
         <!-- <div class="pt-5">
           <p>
@@ -232,7 +233,26 @@
       <% })%>
     </div>
   </div>
+
+  
+<!-- <script>
+
+  var getTest = " <%= post.content%> "  //var test is now assigned to getTest which will only work on browsers
+             console.log({getTest});  // successfully prints 101 on browser
+      // $(function(post) {
+        var htmlObject = document.getElementById('preview');
+
+        console.log({htmlObject})
+
+        htmlObject.innerHTML = getTest;
+      //   var content = post.content
+  
+      //   console.log({content})
+      //   // $('#preview').html(content)
+  
+  </script> -->
+  <!-- END section -->
 </section>
-<!-- END section -->
+
 
 <%- include('./partials/Footer.ejs'); %>
