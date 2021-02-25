@@ -230,6 +230,55 @@ console.log({news})
       currentPage: page,
     })
 })
+
+
+router.get("/news/:slug", async(req, res) => {
+
+  var {slug} = req.params
+
+  var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+  
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+  var views = (await News.findOne({slug})).views
+
+  console.log({views})
+ var news =  await News.findOneAndUpdate({slug}, {
+   $set:{
+     views: views+1
+   }
+ },{new : true}).populate("category").populate("comments")
+
+
+ var comments = news.comments
+
+
+
+ 
+ var similar_news = await News.find().where('status').equals("published").sort({dateCreated : -1}).populate("category")
+
+ console.log({comments})
+
+
+//  console.log({similar_blogs})
+    res.render("single_news", {
+      news,
+       categories, moment,
+       popular_posts,
+       comments,
+       similar_news,
+       recent_posts,
+      //  csrfToken: req.csrfToken(),
+
+       message: req.flash("error"),
+       successMessage: req.flash("success"),
+    })
+})
 router.get("/about", async(req, res) => {
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1

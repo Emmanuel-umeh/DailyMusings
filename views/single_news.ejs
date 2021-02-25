@@ -1,0 +1,240 @@
+<%- include('./partials/Header.ejs'); %>
+
+<section class="site-section py-lg">
+  <div class="container">
+    <div class="row blog-entries element-animate">
+      <div class="col-md-12 col-lg-8 main-content">
+        <img src="<%=news.cover_photo %>" alt="Image" class="img-fluid mb-5" />
+        <div class="post-meta">
+          <span class="author mr-2"
+            ><img src="/images/victor2.jpeg" alt="Colorlib" class="mr-2" />
+            <%=news.title%></span
+          >&bullet;
+          <span class="mr-2">
+            <%=moment(news.dateCreated).format('MMM Do YY')%>
+          </span>
+          &bullet;
+          <span class="ml-2"><span class="fa fa-comments"></span>  <%=news.comments.length%></span>
+        </div>
+        <h1 class="mb-4"><%=news.title%></h1>
+  
+
+        <div class="fr-view post-content-body " id="preview" >
+
+          <%-news.content%>
+
+        </div>
+       
+
+        <!-- <div class="pt-5">
+          <p>
+            Categories: <a href="#">Quotes</a>,
+            <a href="#">Inspirational</a> Tags: <a href="#">#manila</a>,
+            <a href="#">#asia</a>
+          </p>
+        </div> -->
+
+        <div class="pt-5">
+          <h3 class="mb-5"> <%=news.comments.length%> Comments</h3>
+          <ul class="comment-list">
+
+            <%news.comments && news.comments.map((comment, key) => {%>
+            <li class="comment">
+              <div class="vcard">
+                <img src="https://p.kindpng.com/picc/s/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" alt="Image placeholder" />
+              </div>
+              <div class="comment-body">
+                <h3><%= comment.owner_name %></h3>
+                <div class="meta">  <%= moment(comment.dateCreated).fromNow() %>  </div>
+                <p> 
+                  <%= comment.content %>
+                </p>
+                <!-- <p><a href="#" class="reply rounded">Reply</a></p> -->
+              </div>
+            </li>
+
+                            
+            <% })%>
+          </ul>
+          <!-- END comment-list -->
+
+          <div class="comment-form-wrap pt-5">
+            <h3 class="mb-5">Leave a comment</h3>
+
+            <% if (message.length > 0) { %>
+              <!-- <%= message %> -->
+               <!-- <%= message %> -->
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong class="text-center">
+                    <%= message %></strong> 
+                    
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          <% } %> 
+          <% if (successMessage.length > 0) { %>
+              <!-- <%= message %> -->
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong class="text-center">
+                      <%= successMessage %></strong> 
+                      
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+          <% } %>
+      
+      
+            <form  method="POST"   class="p-5 bg-light" action="/blog/<%=news.slug%>/add-comment" enctype="application/json">
+
+            <!-- <form action="#" class="p-5 bg-light"> -->
+              <div class="form-group">     <form  method="POST"  action="/blog/<%=news.slug%>/add-comment" enctype="application/json">
+                <label for="name">Name *</label>
+                <input required type="text" class="form-control1" name="owner_name" id="name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input name="email" type="email" class="form-control" id="email" required />
+              </div>
+              <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" class="form-control" id="website" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  name="content"
+                  id="message"
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <input
+                  type="submit"
+                  value="Post Comment"
+                  class="btn btn-primary"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- END main-content -->
+
+      <div class="col-md-12 col-lg-4 sidebar">
+        <div class="sidebar-box search-form-wrap">
+          <form action="#" class="search-form">
+            <div class="form-group">
+              <span class="icon fa fa-search"></span>
+              <input
+                type="text"
+                class="form-control"
+                id="s"
+                placeholder="Type a keyword and hit enter"
+              />
+            </div>
+          </form>
+        </div>
+        <!-- END sidebar-box -->
+    
+
+        <%- include('./partials/Sidebarprofile.ejs'); %>
+
+        <!-- END sidebar-box -->
+        <div class="sidebar-box">
+          <h3 class="heading">Popular Posts</h3>
+          <div class="post-entry-sidebar">
+            <ul>
+
+              <%popular_posts.forEach((post) => {%>
+              <li>
+                <a href="/blog/<%=post.slug %>">
+                  <img
+                    src="/images/img_1.jpg"
+                    alt="Image placeholder"
+                    class="mr-4"
+                  />
+                  <div class="text">
+                    <h4>
+                      <%=post.title%>
+                    </h4>
+                    <div class="post-meta">
+                      <span class="mr-2"><%=moment(post.dateCreated).format('MMM Do YY')%> </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <% })%>
+            </ul>
+          </div>
+        </div>
+        <!-- END sidebar-box -->
+
+        <%- include('./partials/Categories.ejs'); %>
+        <!-- END sidebar-box -->
+
+        <!-- <div class="sidebar-box">
+            <h3 class="heading">Tags</h3>
+            <ul class="tags">
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Adventure</a></li>
+              <li><a href="#">Food</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Freelancing</a></li>
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Adventure</a></li>
+              <li><a href="#">Food</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Freelancing</a></li>
+            </ul>
+          </div> -->
+      </div>
+      <!-- END sidebar -->
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-3">Related Post</h2>
+      </div>
+    </div>
+    <div class="row">
+
+      <%similar_news.forEach((post) => {%>
+      <div class="col-md-6 col-lg-4">
+        <a
+          href="/blog/<%= post.slug%> "
+          class="a-block sm d-flex align-items-center height-md"
+          style="background-image: url('<%=post.cover_photo %>')"
+        >
+ 
+          <div class="text">
+            <div class="post-meta">
+         
+              <span class="mr-2"> <%= moment(post.dateCreated).fromNow() %>  </span> &bullet;
+              <span class="ml-2"><span class="fa fa-comments"></span>  <%= post.comments.length%>  </span>
+            </div>
+            <h3> <%= post.title%>  </h3>
+          </div>
+        </a>
+      </div>
+      <% })%>
+    </div>
+  </div>
+
+
+</section>
+
+
+<%- include('./partials/Footer.ejs'); %>
