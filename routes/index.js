@@ -793,6 +793,26 @@ router.get("/admin-panel/create-news", isLoggedIn, async(req, res) => {
   try {
 
 
+    res.render("dashboard/create-news", {
+     
+      message: req.flash("error"),
+      successMessage: req.flash("success"),
+    })
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel")
+  }
+
+})
+
+
+
+router.get("/admin-panel/news", isLoggedIn, async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+
+
     const { page = 1} = req.query;
     const limit = 5
    
@@ -832,6 +852,37 @@ router.get("/admin-panel/create-news", isLoggedIn, async(req, res) => {
   }
 
 })
+
+
+router.post("/admin-panel/create-news", isLoggedIn,  parser.single("file"), async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+
+  if(!req.file.path){
+    
+    req.flash("error", "Could not upload this image. please try another")
+    return res.redirect("/admin-panel/create-news")
+  }
+
+  const cover_photo = req.file.path
+
+  const {title,content  } = req.body
+
+  if(!title || !content){
+req.flash("error" , "Please enter all fields")
+   return res.redirect("/admin-panel/create-news")
+  }
+
+
+  var new_news = new News({
+    title,category, content, cover_photo
+  })
+  // console.log(title, category, content)
+  await new_news.save()
+  req.flash("success" , "News created successfully. Publish it to make it visible to users")
+  return res.redirect("/admin-panel/create-news")
+})
+
 
 
 
