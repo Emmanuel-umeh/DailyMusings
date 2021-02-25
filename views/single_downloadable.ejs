@@ -4,28 +4,37 @@
   <div class="container">
     <div class="row blog-entries element-animate">
       <div class="col-md-12 col-lg-8 main-content">
-        <img src="<%=post.cover_photo %>" alt="Image" class="img-fluid mb-5" />
+        <img src="<%=downloadable.cover_photo %>" alt="Image" class="img-fluid mb-5" />
         <div class="post-meta">
           <span class="author mr-2"
             ><img src="/images/victor2.jpeg" alt="Colorlib" class="mr-2" />
-            <%=post.title%></span
+            <%=downloadable.title%></span
           >&bullet;
           <span class="mr-2">
-            <%=moment(post.dateCreated).format('MMM Do YY')%>
+            <%=moment(downloadable.dateCreated).format('MMM Do YY')%>
           </span>
           &bullet;
-          <span class="ml-2"><span class="fa fa-comments"></span>  <%=post.comments.length%></span>
+          <span class="ml-2"><span class="fa fa-comments"></span>  <%=downloadable.comments.length%></span>
         </div>
-        <h1 class="mb-4"><%=post.title%></h1>
-        <a class="category mb-5" href="#"> <%=post.category.category_name%></a>
+        <h1 class="mb-4"><%=downloadable.title%></h1>
+        <a class="category mb-5" href="#"> <%=downloadable.category.category_name%></a>
         <!-- <a class="category mb-5" href="#">Travel</a> -->
 
         <div class="fr-view post-content-body " id="preview" >
 
-          <%-post.content%>
+          <%-downloadable.content%>
+
+
+          
+
 
         </div>
-       
+
+        <center >
+            <a href="<%=downloadable.link %>" target="_blank" class="btn btn-primary btn-round">Download Here</a href="/">
+        </center>
+      
+
 
         <!-- <div class="pt-5">
           <p>
@@ -36,10 +45,10 @@
         </div> -->
 
         <div class="pt-5">
-          <h3 class="mb-5"> <%=post.comments.length%> Comments</h3>
+          <h3 class="mb-5"> <%=downloadable.comments.length%> Comments</h3>
           <ul class="comment-list">
 
-            <%post.comments && post.comments.map((comment, key) => {%>
+            <%downloadable.comments && downloadable.comments.map((comment, key) => {%>
             <li class="comment">
               <div class="vcard">
                 <img src="https://p.kindpng.com/picc/s/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" alt="Image placeholder" />
@@ -57,6 +66,13 @@
                             
             <% })%>
           </ul>
+
+
+                            
+    <!-- <div class="row"> -->
+    
+  <!-- </div> -->
+
           <!-- END comment-list -->
 
           <div class="comment-form-wrap pt-5">
@@ -87,10 +103,10 @@
           <% } %>
       
       
-            <form  method="POST"   class="p-5 bg-light" action="/blog/<%=post.slug%>/add-comment" enctype="application/json">
+            <form  method="POST"   class="p-5 bg-light" action="/downloadable/<%=downloadable.slug%>/add-comment" enctype="application/json">
 
             <!-- <form action="#" class="p-5 bg-light"> -->
-              <div class="form-group">     <form  method="POST"  action="/blog/<%=post.slug%>/add-comment" enctype="application/json">
+              <div class="form-group">     <form  method="POST"  action="/downloadable/<%=downloadable.slug%>/add-comment" enctype="application/json">
                 <label for="name">Name *</label>
                 <input required type="text" class="form-control1" name="owner_name" id="name" />
               </div>
@@ -232,26 +248,8 @@
       </div>
       <% })%>
     </div>
-  </div>
 
-  
-<!-- <script>
 
-  var getTest = " <%= post.content%> "  //var test is now assigned to getTest which will only work on browsers
-             console.log({getTest});  // successfully prints 101 on browser
-      // $(function(post) {
-        var htmlObject = document.getElementById('preview');
-
-        console.log({htmlObject})
-
-        htmlObject.innerHTML = getTest;
-      //   var content = post.content
-  
-      //   console.log({content})
-      //   // $('#preview').html(content)
-  
-  </script> -->
-  <!-- END section -->
 </section>
 
 
