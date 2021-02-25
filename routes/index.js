@@ -875,15 +875,40 @@ req.flash("error" , "Please enter all fields")
 
 
   var new_news = new News({
-    title,category, content, cover_photo
+    title, content, cover_photo
   })
   // console.log(title, category, content)
   await new_news.save()
   req.flash("success" , "News created successfully. Publish it to make it visible to users")
-  return res.redirect("/admin-panel/create-news")
+  return res.redirect("/admin-panel/news")
 })
 
 
+
+router.put("/admin-panel/news/:id/publish", isLoggedIn, async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/blogs")
+    }
+
+    await News.findByIdAndUpdate(id, {
+      $set:{
+        status : "published"
+      }
+    }) 
+    req.flash("success" , "News published successfully and is now visible to users")
+    return res.redirect("/admin-panel/news")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/news")
+  }
+
+})
 
 
 

@@ -149,7 +149,7 @@
                             
     
                             <% if (news_post.status == "draft") { %>
-                              <form method="post" method="POST" action="/admin-panel/<%= news_post._id %>/publish?_method=PUT">
+                              <form method="post" method="POST" action="/admin-panel/news/<%= news_post._id %>/publish?_method=PUT">
                                             
                               <td>
                                 <!-- <div class="row"> -->
@@ -165,7 +165,7 @@
                             <% if (news_post.status == "published") { %>
         
     
-                              <form method="post" method="POST" action="/admin-panel/<%= news_post._id %>/unpublish?_method=PUT">
+                              <form method="post" method="POST" action="/admin-panel/news/<%= news_post._id %>/unpublish?_method=PUT">
                                             
                               <td>
                                 <!-- <div class="row"> -->
@@ -180,7 +180,7 @@
                             </td>
                             
                      
-                            <form method="post" method="POST" action="/admin-panel/<%= news_post._id %>/delete?_method=POST">
+                            <form method="post" method="POST" action="/admin-panel/news/<%= news_post._id %>/delete?_method=POST">
                             <td>
                           <button  type="submit"  style="background-color: transparent;" class="btn btn-primary btn-round">          <i style="color: red; font-size: medium;" class="nc-icon nc-simple-remove"></i></button>
                          
