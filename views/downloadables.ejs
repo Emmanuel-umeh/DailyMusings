@@ -1,0 +1,171 @@
+
+<%- include('./partials/Header.ejs'); %>
+
+<section class="site-section pt-5">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h2 class="mb-4">Downloadable Materials</h2>
+        </div>
+      </div>
+      <div class="row blog-entries">
+        <div class="col-md-12 col-lg-8 main-content">
+          <div class="row mb-5 mt-5">
+
+            <div class="col-md-12">
+        
+
+              <%downloadables && downloadables.map((downloadable, key) => {%>
+              <div class="post-entry-horzontal">
+                <a href="/downloadable/<%= downloadable.slug %>">
+                  <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url('<%=downloadable.cover_photo %>');"></div>
+                  <span class="text">
+                    <div class="post-meta">
+                      <span class="author mr-2"><img src="images/victor.jpeg" alt="DailyMusings"> DailyMusings</span>&bullet;
+                      <span class="mr-2">    <%=moment(downloadable.dateCreated).format('MMM Do YY')%> </span> &bullet;
+                      <span class="mr-2">    <%=downloadable.category.category_name%></span> &bullet;
+                      <span class="ml-2"><span class="fa fa-comments"></span> <%=downloadable.comments.length%></span>
+                    </div>
+                    <h2><%=downloadable.title%></h2>
+                  </span>
+                </a>
+              </div>
+              <!-- END post -->
+
+                
+              <% })%>
+            </div>
+          </div>
+
+     
+          <div class="row mt-5">
+            <div class="col-md-12 text-center">
+              <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                <li class="page-item <%= Number(currentPage) == 1 ? 'disabled' : null %>">
+                  <a class="page-link" href="/downloadable?page=<%= Number(currentPage) -1 %>" tabindex="-1">
+                    <i class="nc-icon nc-minimal-left"></i>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <!-- <% for (var i =1; i <=toalPages;  i++ ) { %>
+                  <li class="page-item <% if (currentPage == i) { %> <%= 'active' %> <% } %>">
+                      <a class="page-link " href="/downloadable?page=<%= i %>"><%= i %></a>
+                    </li>   
+                  <%#  will output the numbers 1-10 %>
+                  <% } %> -->
+
+
+                  <% if (toalPages > 0) { %>
+                    <!-- <ul class="pagination text-center"> -->
+                        <!-- <% if (currentPage == 1) { %>
+                            <li class="disabled"><a>First</a></li>
+                        <% } else { %>
+                            <li><a href="/products/1">First</a></li>
+                        <% } %> -->
+                        <% var i = (Number(currentPage) > 3 ? Number(currentPage) - 1 : 1) %>
+                        <% if (i !== 1) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                        <% for (; i <= (Number(currentPage) + 1) && i <= toalPages; i++) { %>
+                            <% if (i == currentPage) { %>
+                              <li class="page-item active">
+                                <a class="page-link " href="/downloadable?page=<%= i %>"><%= i %></a>
+                              </li>   
+                            <% } else { %>
+                              <li class="page-item ">
+                                <a class="page-link " href="/downloadable?page=<%= i %>"><%= i %></a>
+                              </li>   
+                            <% } %>
+                            <% if (i == Number(currentPage) + 1 && i < toalPages) { %>
+                              <li class="page-item">
+                                <a class="page-link " href="/downloadable?page=<%= toalPages %>">...</a>
+                              </li>   
+                            <% } %>
+                        <% } %>
+                   
+                    <!-- </ul> -->
+                <% } %>
+      
+
+                <% if (currentPage != toalPages) { %>
+                <li class="page-item">
+                  <a class="page-link" href="/downloadable?page=<%= Number(currentPage) +1 %>" tabindex="1">
+                    <i class="nc-icon nc-align-right"></i>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+
+                <% } %>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+          <!-- <div class="row mt-5">
+            <div class="col-md-12 text-center">
+              <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                  <li class="page-item  active"><a class="page-link" href="#">&lt;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div> -->
+
+          
+
+        </div>
+
+        <!-- END main-content -->
+
+        <div class="col-md-12 col-lg-4 sidebar">
+          <!-- <div class="sidebar-box search-form-wrap">
+            <form action="#" class="search-form">
+              <div class="form-group">
+                <span class="icon fa fa-search"></span>
+                <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+              </div>
+            </form>
+          </div> -->
+          <!-- END sidebar-box -->
+          <!-- <%- include('./partials/Sidebarprofile.ejs'); %> -->
+
+          <!-- END sidebar-box -->  
+          <%- include('./partials/Popular_posts.ejs'); %>
+          <!-- END sidebar-box -->
+
+          <%- include('./partials/Categories.ejs'); %>
+ 
+          <!-- END sidebar-box -->
+
+          <!-- <div class="sidebar-box">
+            <h3 class="heading">Tags</h3>
+            <ul class="tags">
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Adventure</a></li>
+              <li><a href="#">Food</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Freelancing</a></li>
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Adventure</a></li>
+              <li><a href="#">Food</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Freelancing</a></li>
+            </ul>
+          </div> -->
+        </div>
+        <!-- END sidebar -->
+
+      </div>
+    </div>
+  </section>
+
+  <%- include('./partials/Footer.ejs'); %>

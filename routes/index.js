@@ -187,6 +187,9 @@ console.log({posts})
       currentPage: page,
     })
 })
+
+
+
 router.get("/news", async(req, res) => {
 
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
@@ -279,6 +282,59 @@ router.get("/news/:slug", async(req, res) => {
        successMessage: req.flash("success"),
     })
 })
+
+
+router.post("/news/:slug/add-comment", async(req, res) => {
+
+  var {slug} = req.params
+  const {owner_name, email,content } = req.body
+  if(!owner_name || !email || !content){
+
+    console.log("enter all fields")
+    req.flash("error", "Please fill all fields")
+    res.redirect(`/news/${slug}`)
+  }
+
+  var post_id = (await News.findOne({slug}))._id
+
+  var comment = new Comment({
+post : post_id,
+owner_name,email,content
+
+
+  })
+
+  console.log({comment})
+  var saved_comment = await comment.save()
+
+  await News.findOneAndUpdate({slug},{
+    $push:{
+      comments : saved_comment._id 
+    }
+  })
+console.log("saved succesfully!!!")
+
+// req.flash("success", "commented succes")
+
+    res.redirect(`/news/${slug}`)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/about", async(req, res) => {
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1

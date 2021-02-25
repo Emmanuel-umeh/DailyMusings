@@ -86,10 +86,10 @@
           <% } %>
       
       
-            <form  method="POST"   class="p-5 bg-light" action="/blog/<%=news.slug%>/add-comment" enctype="application/json">
+            <form  method="POST"   class="p-5 bg-light" action="/news/<%=news.slug%>/add-comment" enctype="application/json">
 
             <!-- <form action="#" class="p-5 bg-light"> -->
-              <div class="form-group">     <form  method="POST"  action="/blog/<%=news.slug%>/add-comment" enctype="application/json">
+              <div class="form-group">     <form  method="POST"  action="/news/<%=news.slug%>/add-comment" enctype="application/json">
                 <label for="name">Name *</label>
                 <input required type="text" class="form-control1" name="owner_name" id="name" />
               </div>
@@ -154,7 +154,7 @@
 
               <%popular_posts.forEach((post) => {%>
               <li>
-                <a href="/blog/<%=post.slug %>">
+                <a href="/news/<%=post.slug %>">
                   <img
                     src="/images/img_1.jpg"
                     alt="Image placeholder"
@@ -214,7 +214,7 @@
       <%similar_news.forEach((post) => {%>
       <div class="col-md-6 col-lg-4">
         <a
-          href="/blog/<%= post.slug%> "
+          href="/news/<%= post.slug%> "
           class="a-block sm d-flex align-items-center height-md"
           style="background-image: url('<%=post.cover_photo %>')"
         >
