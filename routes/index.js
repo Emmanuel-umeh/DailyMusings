@@ -206,6 +206,7 @@ router.get("/news", async(req, res) => {
   const limit = 5
  
   const news = await News.find()
+  .where("status").equals("published")
                           .limit(limit * 1)
                           .skip((page - 1) * limit)
                           .exec()
