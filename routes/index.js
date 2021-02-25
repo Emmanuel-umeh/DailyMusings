@@ -893,7 +893,7 @@ router.put("/admin-panel/news/:id/publish", isLoggedIn, async(req, res) => {
 
     if(!id){
       req.flash("error" , "Something went wrong. Please contact developer")
-      return res.redirect("/admin-panel/blogs")
+      return res.redirect("/admin-panel/news")
     }
 
     await News.findByIdAndUpdate(id, {
@@ -902,6 +902,50 @@ router.put("/admin-panel/news/:id/publish", isLoggedIn, async(req, res) => {
       }
     }) 
     req.flash("success" , "News published successfully and is now visible to users")
+    return res.redirect("/admin-panel/news")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/news")
+  }
+
+})
+
+router.put("/admin-panel/news/:id/unpublish", isLoggedIn, async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/news")
+    }
+
+    await News.findByIdAndUpdate(id, {
+      $set:{
+        status : "published"
+      }
+    }) 
+    req.flash("success" , "News unpublished successfully and is no longer visible to users")
+    return res.redirect("/admin-panel/news")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel/news")
+  }
+
+})
+router.post("/admin-panel/news/:id/delete", isLoggedIn, async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+    const {id} = req.params
+
+    if(!id){
+      req.flash("error" , "Something went wrong. Please contact developer")
+      return res.redirect("/admin-panel/blogs")
+    }
+    await News.findByIdAndDelete(id) 
+    req.flash("success" , "News deleted successfully and is no longer visible to users")
     return res.redirect("/admin-panel/news")
   } catch (error) {
     req.flash("error" , "Something went wrong. Please contact developer")
