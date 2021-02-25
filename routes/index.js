@@ -562,7 +562,7 @@ router.get("/downloadables", async(req, res) => {
 
 
 })
-router.get("/downloadables/:slug", async(req, res) => {
+router.get("/downloadable/:slug", async(req, res) => {
 
   var {slug} = req.params
 
@@ -590,7 +590,7 @@ router.get("/downloadables/:slug", async(req, res) => {
 
  console.log({comments})
 
- var similar_blogs = await Post.find().where('status').equals("published").where("category").equals(post.category).populate("category")
+ var similar_blogs = await Post.find().where('status').equals("published").populate("category")
 
 
  console.log({similar_blogs})
@@ -756,7 +756,7 @@ req.flash("error" , "Please enter all fields")
   // console.log(title, category, content)
   await new_post.save()
   req.flash("success" , "Blog post created successfully. Publish it to make it visible to users")
-  return res.redirect("/admin-panel/create-blog")
+  return res.redirect("/admin-panel/blogs")
 })
 
 
@@ -965,27 +965,32 @@ router.get('/admin-panel/create-downloadable', isLoggedIn, async (req, res) => {
 });
 
 
-router.post("/admin-panel/create-downloadable", isLoggedIn, async(req, res) => {
+router.post("/admin-panel/create-downloadable", isLoggedIn,   parser.single("file"), async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 
   try {
     const {title, link, category,content  } = req.body
 
+    const cover_photo = req.file.path
   if(!title || !link || !category || !content){
 req.flash("error" , "Please enter all fields")
    return res.redirect("/admin-panel/create-downloadable")
   }
 
 
+
+
   var new_post = new Downloadables({
-    title,category,link, content
+    title,category,link, content,
+    cover_photo
   })
   // console.log(title, category, content)
   await new_post.save()
   req.flash("success" , "Downloadable material created successfully. Publish it to make it visible to users")
-  return res.redirect("/admin-panel/create-downloadable")  
+  return res.redirect("/admin-panel/downloadables")  
   } catch (error) {
+    console.log("error!!!!!!!!!!!!!!!!!!!!!!!!!!", error)
     req.flash("error" , "Something went wrong. Please contact the developer")
    return res.redirect("/admin-panel/create-downloadable")
   }

@@ -54,7 +54,7 @@
                         </div>
                   <% } %>
                     <div class="card-body">
-                      <form  method="POST"  action="/admin-panel/create-downloadable" enctype="application/json">
+                      <form  method="POST"  action="/admin-panel/create-downloadable" enctype="multipart/form-data">
                         <div class="row">
                           <div class="col-md-5 pr-1">
                             <div class="form-group">
@@ -81,6 +81,25 @@
                             
                                 </select>
                             </div>
+                          </div>
+
+                          <div class="col-md-12 pl-1 ">
+                            <center>
+      
+      
+      
+                              <h5 class="card-title">Add Cover Photo</h5>
+      
+                            <div class="avatar-upload">
+                              <div class="avatar-edit">
+                                  <input required type='file' name="file"  class="form-control" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                  <label for="imageUpload"></label>
+                              </div>
+                              <div class="avatar-preview">
+                                  <div id="imagePreview" style="background-image:'https://lh3.googleusercontent.com/proxy/k-n-WW8msAPgCbpLzAyZKR9EHoiHSDxpEZzMoEz9-dkLJMaWgxeINXz7WbFXUCvfq6DIrEbmC8tMqN1awpqC92yKSuH4FTmZxgrpSXqHS2Z3_T_hbY0wYt_uyEZFdouzrG7VMIMtPd4hq3M'">
+                                  </div>
+                              </div>
+                            </center>
                           </div>
                           <div class="col-md-12 pl-1">
                             <div class="form-group">

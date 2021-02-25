@@ -35,8 +35,9 @@ const downloadableSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    image:{
-        type:String
+    cover_photo:{
+        type:String,
+        default: "https://images.pexels.com/photos/2774570/pexels-photo-2774570.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
 
     // downloadable material link
