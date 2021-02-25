@@ -25,6 +25,7 @@ const multer = require("multer")
 var cloudinary = require('cloudinary').v2;
 
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const News = require('../models/News');
 
 // cloudinary configuration
 cloudinary.config({
@@ -781,6 +782,57 @@ router.post("/admin-panel/downloadable/:id/delete", isLoggedIn, async(req, res) 
   }
 
 })
+
+
+
+
+// ############################ NEWS ENDPOINTS ################################################
+router.get("/admin-panel/create-news", isLoggedIn, async(req, res) => {
+  // var editor =  FroalaEditor("#example")
+
+  try {
+
+
+    const { page = 1} = req.query;
+    const limit = 5
+   
+    const news = await News.find()
+                            .limit(limit * 1)
+                            .skip((page - 1) * limit)
+                            .exec()
+  
+                            const count = await News.countDocuments();
+  
+            
+    const toalPages = Math.ceil(count / limit) 
+    console.log("TOTAL PAGES", toalPages)
+  
+      res.render("dashboard/news", {
+        news,
+        message: req.flash("error"),
+        successMessage: req.flash("success"),
+        toalPages,
+        currentPage: page
+      })
+    // const {id} = req.params
+
+
+
+    // if(!id){
+    //   req.flash("error" , "Something went wrong. Please contact developer")
+    //   return res.redirect("/admin-panel/downloadables")
+    // }
+
+    // await Downloadables.findByIdAndDelete(id) 
+    // req.flash("success" , "Downloadable material deleted successfully and is no longer visible to users")
+    // return res.redirect("/admin-panel/downloadables")
+  } catch (error) {
+    req.flash("error" , "Something went wrong. Please contact developer")
+    return res.redirect("/admin-panel")
+  }
+
+})
+
 
 
 

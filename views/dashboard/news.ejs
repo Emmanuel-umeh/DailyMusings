@@ -1,0 +1,161 @@
+
+
+
+  
+      <%- include('../partials/dashboard/Header.ejs'); %>
+
+
+
+      <body class="">
+        <div class="wrapper ">
+          <div class="sidebar" data-color="white" data-active-color="danger">
+        
+              <%- include('../partials/dashboard/Sidebar.ejs'); %>
+          </div>
+          <div class="main-panel">
+            <!-- Navbar -->
+          
+      
+      <%- include('../partials/dashboard/Nav.ejs'); %>
+      
+            <!-- End Navbar -->
+            <div class="content">
+              <div class="row">
+         
+                <div class="col-md-12">
+                  <div class="card card-user">
+                    <div class="card-header">
+                      <h5 class="card-title">Create Blog Posts</h5>
+                    </div>
+      
+      
+                        
+                    <% if (message.length > 0) { %>
+                      <!-- <%= message %> -->
+                       <!-- <%= message %> -->
+                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong class="text-center">
+                            <%= message %></strong> 
+                            
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                  <% } %> 
+                  <% if (successMessage.length > 0) { %>
+                      <!-- <%= message %> -->
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong class="text-center">
+                              <%= successMessage %></strong> 
+                              
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                  <% } %>
+                    <div class="card-body">
+                      <!-- <form  method="POST"  action="/admin-panel/create-blog" enctype="application/json"> -->
+                        <form  method="post" enctype="multipart/form-data" action="/admin-panel/create-news" >
+                        <div class="row">
+                          <div class="col-md-12 pr-1 justify-content-center text-center" >
+                            <div class="form-group">
+                              <label>News Topic</label>
+                              <input                      name="title"  required type="text" class="form-control" placeholder="Enter news topic" >
+                            </div> 
+                          </div>
+                
+                          <div class="col-md-12 pl-1 ">
+                            <center>
+      
+      
+      
+                              <h5 class="card-title">Add Cover Photo</h5>
+      
+                            <div class="avatar-upload">
+                              <div class="avatar-edit">
+                                  <input required type='file' name="file"  class="form-control" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                  <label for="imageUpload"></label>
+                              </div>
+                              <div class="avatar-preview">
+                                  <div id="imagePreview" style="background-image: url('https://lh3.googleusercontent.com/proxy/k-n-WW8msAPgCbpLzAyZKR9EHoiHSDxpEZzMoEz9-dkLJMaWgxeINXz7WbFXUCvfq6DIrEbmC8tMqN1awpqC92yKSuH4FTmZxgrpSXqHS2Z3_T_hbY0wYt_uyEZFdouzrG7VMIMtPd4hq3M')">
+                                  </div>
+                              </div>
+                            </center>
+                          </div>
+                            <!-- <div class="form-group">
+                              <label for="exampleInputEmail1">News Cover Image</label>
+                              <input accept="image/*" required type="file" name="file" class="form-control" placeholder="Click to select image">
+                            </div> -->
+                          </div>
+                        </div>
+                        <!-- <div class="row">
+                          <div class="col-md-6 pr-1">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              <input type="text" class="form-control" placeholder="Company" value="Chet">
+                            </div>
+                          </div>
+                          <div class="col-md-6 pl-1">
+                            <div class="form-group">`
+                              <label>Last Name</label>
+                              <input type="text" class="form-control" placeholder="Last Name" value="Faker">
+                            </div>
+                          </div>
+                        </div> -->
+                        <!-- <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Address</label>
+                              <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+                            </div>
+                          </div>
+                        </div> -->
+                        <!-- <div class="row">
+                          <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                              <label>City</label>
+                              <input type="text" class="form-control" placeholder="City" value="Melbourne">
+                            </div>
+                          </div>
+                          <div class="col-md-4 px-1">
+                            <div class="form-group">
+                              <label>Country</label>
+                              <input type="text" class="form-control" placeholder="Country" value="Australia">
+                            </div>
+                          </div>
+                          <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                              <label>Postal Code</label>
+                              <input type="number" class="form-control" placeholder="ZIP Code">
+                            </div>
+                          </div>
+                        </div> -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+
+
+                              <label>News Content</label>
+      
+                              <textarea
+                              name="content" 
+                              placeholder="write news post here"
+                              required id="example" class="form-control textarea"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="update ml-auto mr-auto">
+                            <button  type="submit" class="btn btn-primary btn-round">Create News</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+      
+      <%- include('../partials/dashboard/Footer.ejs'); %>
+      
