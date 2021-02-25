@@ -569,6 +569,12 @@ textarea.form-control {
   .owl-carousel .owl-item.active {
     opacity: 1; }
 
+    
+    .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item {
+      -ms-touch-action: pan-y !important;
+      touch-action: pan-y !important;
+  }
+
 .owl-carousel .owl-nav {
   position: absolute;
   top: 50%;
