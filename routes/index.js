@@ -26,6 +26,7 @@ var cloudinary = require('cloudinary').v2;
 
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const News = require('../models/News');
+const Downloadable = require('../models/Downloadable');
 
 // cloudinary configuration
 cloudinary.config({
@@ -512,6 +513,139 @@ console.log("saved succesfully!!!")
 
     res.redirect(`/blog/${slug}`)
 })
+
+
+
+
+// ###################### Downloadables routes ###############################
+
+router.get("/downloadables", async(req, res) => {
+
+
+
+  var recent_posts = await ( await Post.find() .where('status').equals("published").populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
+
+  var categories = await (await BlogCategory.find()).slice(0,10)
+  
+  const { page = 1} = req.query;
+  const limit = 5
+ 
+  const downloadables = await Downloadable.find().where('status').equals("published")
+                          .limit(limit * 1)
+                          .skip((page - 1) * limit)
+                          .populate("category")
+                          .exec()
+
+                          const count = await Downloadable.countDocuments();
+// console.log({downloadables})
+          
+  const toalPages = Math.ceil(count / limit) 
+  console.log("TOTAL PAGES", toalPages)
+
+    res.render("downloadables", {
+      downloadables,
+      message: req.flash("error"),
+      successMessage: req.flash("success"),
+      toalPages,
+      currentPage: page,
+      moment,
+      recent_posts,
+      categories,
+      popular_posts
+    })
+
+
+
+})
+router.get("/downloadables/:slug", async(req, res) => {
+
+  var {slug} = req.params
+
+  var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+  
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+  var views = (await Downloadable.findOne({slug})).views
+
+  console.log({views})
+ var downloadable =  await Downloadable.findOneAndUpdate({slug}, {
+   $set:{
+     views: views+1
+   }
+ },{new : true}).populate("category").populate("comments")
+
+
+ var comments = downloadable.comments
+
+
+ console.log({comments})
+
+ var similar_blogs = await Post.find().where('status').equals("published").where("category").equals(post.category).populate("category")
+
+
+ console.log({similar_blogs})
+    res.render("single_downloadable", {
+      downloadable,
+       categories, moment,
+       popular_posts,
+       comments,
+       similar_blogs,
+       recent_posts,
+      //  csrfToken: req.csrfToken(),
+
+       message: req.flash("error"),
+       successMessage: req.flash("success"),
+    })
+})
+
+
+
+
+router.post("/downloadable/:slug/add-comment", async(req, res) => {
+
+  var {slug} = req.params
+  const {owner_name, email,content } = req.body
+  if(!owner_name || !email || !content){
+
+    console.log("enter all fields")
+    req.flash("error", "Please fill all fields")
+    res.redirect(`/blog/${slug}`)
+  }
+
+  var post_id = (await Downloadable.findOne({slug}))._id
+
+  var comment = new Comment({
+post : post_id,
+owner_name,email,content
+
+
+  })
+
+  console.log({comment})
+  var saved_comment = await comment.save()
+
+  await Downloadable.findOneAndUpdate({slug},{
+    $push:{
+      comments : saved_comment._id 
+    }
+  })
+console.log("saved succesfully!!!")
+
+// req.flash("success", "commented succes")
+
+    res.redirect(`/downloadable/${slug}`)
+})
+
 
 
 
