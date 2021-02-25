@@ -187,6 +187,48 @@ console.log({posts})
       currentPage: page,
     })
 })
+router.get("/news", async(req, res) => {
+
+  var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
+
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+  
+  
+  const { page = 1} = req.query;
+  const limit = 5
+ 
+  const news = await News.find()
+                          .limit(limit * 1)
+                          .skip((page - 1) * limit)
+                          .exec()
+
+                          const count = await Post.countDocuments();
+console.log({news})
+          
+  const toalPages = Math.ceil(count / limit) 
+  console.log("TOTAL PAGES", toalPages)
+
+
+
+    res.render("news", {
+      recent_posts,
+      popular_posts,
+
+      news,
+      moment,
+      categories,
+      toalPages,
+      currentPage: page,
+    })
+})
 router.get("/about", async(req, res) => {
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1
