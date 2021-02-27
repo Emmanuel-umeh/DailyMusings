@@ -13,6 +13,8 @@ var methodOverride = require('method-override')
 const helmet = require('helmet')
 const mongoose = require("mongoose");
 const passport = require("passport")
+
+const MongoStore = require('connect-mongo').default;
 const app = express();
 app.use(
   cors({
@@ -64,7 +66,7 @@ app.use(cookieParser()); //
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "ejs");
   /** VIEWS CONFIGURATION */
-  app.use(session({ secret: 'sdmlsd&**nkjas)(USse' })); // session secret
+  app.use(session({ secret: process.env.SESSION_SECRET})); // session secret
   app.use(passport.initialize());
   app.use(passport.session()); // persistent login sessions
   app.use(flash()); // use connect-flash for flash messages stored in session
@@ -97,7 +99,7 @@ app.use('/', require('./routes/index'))
 
 
 
-app.locals.title="Agro"
+app.locals.title="DailyMusings"
 app.locals.notifications = []
 // app.localsauthenticated = !req.user.anonymous
 

@@ -28,11 +28,12 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const News = require('../models/News');
 const Downloadable = require('../models/Downloadable');
 
+
 // cloudinary configuration
 cloudinary.config({
-  cloud_name: "dailymusings",
-  api_key: "727572747612253",
-  api_secret: "pKKrw6zilXbGUF-Owfrx2nW8s0U"
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
   // cloud_name: process.env.CLOUD_NAME,
   // api_key: process.env.API_KEY,
   // api_secret: process.env.API_SECRET
@@ -146,6 +147,8 @@ router.post(
 
 
 router.get("/", async(req, res) => {
+
+  console.log("cloudinary!!!!!!!!!!!!!!!!!!!!!!!! ", process.env.CLOUD_NAME)
 
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1
