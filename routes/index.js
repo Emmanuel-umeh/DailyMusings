@@ -148,7 +148,7 @@ router.post(
 
 router.get("/", async(req, res) => {
 
-  console.log("cloudinary!!!!!!!!!!!!!!!!!!!!!!!! ", process.env.CLOUD_NAME)
+  // console.log("cloudinary!!!!!!!!!!!!!!!!!!!!!!!! ", process.env.CLOUD_NAME)
 
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1
@@ -173,7 +173,7 @@ router.get("/", async(req, res) => {
                           .exec()
 
                           const count = await Post.countDocuments();
-console.log({posts})
+// console.log({posts})
           
   const toalPages = Math.ceil(count / limit) 
   console.log("TOTAL PAGES", toalPages)
@@ -219,7 +219,7 @@ router.get("/news", async(req, res) => {
                           .exec()
 
                           const count = await Post.countDocuments();
-console.log({news})
+// console.log({news})
           
   const toalPages = Math.ceil(count / limit) 
   console.log("TOTAL PAGES", toalPages)
@@ -254,7 +254,7 @@ router.get("/news/:slug", async(req, res) => {
 
   var views = (await News.findOne({slug})).views
 
-  console.log({views})
+  // console.log({views})
  var news =  await News.findOneAndUpdate({slug}, {
    $set:{
      views: views+1
@@ -269,7 +269,7 @@ router.get("/news/:slug", async(req, res) => {
  
  var similar_news = await News.find().where('status').equals("published").sort({dateCreated : -1}).populate("category")
 
- console.log({comments})
+//  console.log({comments})
 
 
 //  console.log({similar_blogs})
@@ -308,7 +308,7 @@ owner_name,email,content
 
   })
 
-  console.log({comment})
+  // console.log({comment})
   var saved_comment = await comment.save()
 
   await News.findOneAndUpdate({slug},{
@@ -413,7 +413,7 @@ router.get("/blog", async(req, res) => {
                           .exec()
 
                           const count = await Post.countDocuments();
-console.log({blogs})
+// console.log({blogs})
           
   const toalPages = Math.ceil(count / limit) 
   console.log("TOTAL PAGES", toalPages)
@@ -459,12 +459,12 @@ router.get("/blog/:slug", async(req, res) => {
  var comments = post.comments
 
 
- console.log({comments})
+//  console.log({comments})
 
  var similar_blogs = await Post.find().where('status').equals("published").where("category").equals(post.category).populate("category")
 
 
- console.log({similar_blogs})
+//  console.log({similar_blogs})
     res.render("single_blog", {
       post,
        categories, moment,
