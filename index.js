@@ -22,7 +22,7 @@ app.use(
 );
 
 
-// console.log("path", process.env.path)
+// console.log("path", process.env.MONGO_URI)
 app.use(express.json());
 
 // mongoose uri
@@ -33,13 +33,13 @@ app.use(express.json());
 // Connect to mongoose
 try{
   mongoose
-  .connect("mongodb+srv://admin:Loaded888@cluster0.onrce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+  .connect( process.env.MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
   useFindAndModify : false
   })
-  .then(() => console.log("MongoDB Connected...",process.env.MONGO_URL))
+  .then(() => console.log("MongoDB Connected..."))
   .catch((err) =>{
     if(err){
       // return res.send({msg:err})
