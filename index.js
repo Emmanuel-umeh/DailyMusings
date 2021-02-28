@@ -36,7 +36,8 @@ app.use(express.json());
 // Connect to mongoose
 try{
   mongoose
-  .connect( process.env.MONGO_URI, {
+  // .connect( process.env.MONGO_URI, {
+   .connect("mongodb+srv://admin:Loaded888@cluster0.onrce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
