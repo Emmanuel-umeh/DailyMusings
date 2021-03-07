@@ -73,40 +73,7 @@ const fileFilter = (req, file, cb) => {
 
 
 const parser = multer({ storage: storage });
-// auth handles
-// router.get("/signup",csrfProtection,function (req, res) {
-//   console.log(req);
-//   // render the page and pass in any flash data if it exists
-//   res.render("signup.ejs", {
-//     message: req.flash("signupMessage"),
-//     title: "Sign-Up",
-//     csrfToken: req.csrfToken()
-//   });
-// });
-// router.post(
-//   "/signup",
-//   // csrfProtection,
-//   // checkPasswords,
-//   passport.authenticate("admin-signup", {
-//     successRedirect : '/admin-panel', // redirect to the secure profile section
-//     failureRedirect: "/admin/signup", // redirect back to the signup page if there is an error
-//     failureFlash: true, // allow flash messages
-//   }),
-//   function (req, res) {
-//     // WHEN THE USER SIGNS UP SUCCESSFULLY
-//     // console.log("")
-//     // pusher.trigger("cryptoHeaven", "signedUp", {
-//     //   message: "Signed Up Successfully",
-//     // });
-//     // const user =  User.findByIdAndUpdate(req.user._id, {
-//     //   $set:{
-//     //     "isAdmin":truw
-//     //   }
-//     // })
-//     // res.redirect("/admin");
-//     res.json("signed up successfully")
-//   }
-// );
+
 
 
 router.get("/login", csrfProtection, async (req, res)=> {
