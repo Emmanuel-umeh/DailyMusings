@@ -634,7 +634,6 @@ owner_name,email,content
 
   })
 
-  console.log({comment})
   var saved_comment = await comment.save()
 
   await Downloadable.findOneAndUpdate({slug},{
@@ -756,7 +755,6 @@ req.flash("error" , "Please enter all fields")
   var new_post = new Post({
     title,category, content, cover_photo
   })
-  // console.log(title, category, content)
   await new_post.save()
   req.flash("success" , "Blog post created successfully. Publish it to make it visible to users")
   return res.redirect("/admin-panel/blogs")
