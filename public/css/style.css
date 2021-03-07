@@ -1384,41 +1384,7 @@ blockquote {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
-    
-    /* NAVIGATION */
-    nav {
-      width: 80%;
-      margin: 0 auto;
-      background: #fff;
-      padding: 50px 0;
-      box-shadow: 0px 5px 0px #dedede;
-    }
-    nav ul {
-      list-style: none;
-      text-align: center;
-    }
-    nav ul li {
-      display: inline-block;
-    }
-    nav ul li a {
-      display: block;
-      padding: 15px;
-      text-decoration: none;
-      color: #aaa;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin: 0 10px;
-    }
-    nav ul li a,
-    nav ul li a:after,
-    nav ul li a:before {
-      transition: all .5s;
-    }
-    nav ul li a:hover {
-      color: #555;
-    }
-    
-    
+
 
     
     /* SHIFT */
