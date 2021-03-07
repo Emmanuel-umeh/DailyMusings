@@ -448,7 +448,7 @@ router.get("/blog/:slug", async(req, res) => {
 
   var views = (await Post.findOne({slug})).views
 
-  console.log({views})
+
  var post =  await Post.findOneAndUpdate({slug}, {
    $set:{
      views: views+1
