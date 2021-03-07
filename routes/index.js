@@ -873,7 +873,7 @@ router.get("/admin-panel/create-category", isLoggedIn, async(req, res) => {
  
 var all_categories = await BlogCategory.find()
 
-console.log({all_categories})
+
 
 
     res.render("dashboard/create_category", {
@@ -897,30 +897,6 @@ router.post('/admin-panel/upload_image', parser.single("file"),  (req, res)=> {
 
   return res.send(data);
 
-  // cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-  // cloudinary.uploader.upload(image, function(error, result) { 
-    
-  //   if(error){
-  //     console.log({error})
-  //     return res.redirect("/admin-panel")
-  //   }
-    
-    
-  //   console.log({result}) });
- 
-  //   return res.redirect("/admin-panel-success")
-  // Store image.
-  // FroalaEditor.Image.upload(req, '/uploads/', function(err, data) {
-  //   // Return data.
-  //   if (err) {
-  //     console.log({err})
-  //     return res.send(JSON.stringify(err));
-  //   }
-    
-
-  //   console.log(data)
-  //   res.send(data);
-  // });
 });
 
 
