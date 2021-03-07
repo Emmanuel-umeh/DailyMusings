@@ -1385,14 +1385,6 @@ blockquote {
     stroke-dashoffset: -136px; } }
 
     
-    .center {
-      text-align: center;
-    }
-    
-    section {
-      height: 100vh;
-    }
-    
     /* NAVIGATION */
     nav {
       width: 80%;
