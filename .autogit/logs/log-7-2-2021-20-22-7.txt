@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Sun Mar 07 2021 20:22:07 GMT+0100 (West Africa Standard Time)
+------------------------------------------------------
+
+Modified files:
+* views/partials/Header.ejs
+
+
+Created files:
+* .autogit/logs/log-7-2-2021-20-21-52.txt
+
+
+Deleted files:
+
+
+Renamed files:
