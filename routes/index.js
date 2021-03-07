@@ -580,7 +580,7 @@ router.get("/downloadable/:slug", async(req, res) => {
 
   var views = (await Downloadable.findOne({slug})).views
 
-  console.log({views})
+
  var downloadable =  await Downloadable.findOneAndUpdate({slug}, {
    $set:{
      views: views+1
@@ -591,12 +591,10 @@ router.get("/downloadable/:slug", async(req, res) => {
  var comments = downloadable.comments
 
 
- console.log({comments})
 
  var similar_blogs = await Post.find().where('status').equals("published").populate("category")
 
 
- console.log({similar_blogs})
     res.render("single_downloadable", {
       downloadable,
        categories, moment,
