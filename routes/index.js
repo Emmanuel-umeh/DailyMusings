@@ -502,7 +502,7 @@ owner_name,email,content
 
   })
 
-  console.log({comment})
+
   var saved_comment = await comment.save()
 
   await Post.findOneAndUpdate({slug},{
