@@ -1385,14 +1385,14 @@ blockquote {
     stroke-dashoffset: -136px; } }
 
 
-nav.shift ul li a {
+.shift ul li a {
   position:relative;
   z-index: 1;
 }
-nav.shift ul li a:hover {
+.shift ul li a:hover {
   color: #91640F;
 }
-nav.shift ul li a:after {
+.shift ul li a:after {
   display: block;
   position: absolute;
   top: 0;
@@ -1409,7 +1409,7 @@ nav.shift ul li a:after {
   opacity: 0;
   z-index: -1;
 }
-nav.shift ul li a:hover:after {
+.shift ul li a:hover:after {
   opacity: 1;
   visibility: visible;
   height: 100%;
