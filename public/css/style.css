@@ -1427,7 +1427,7 @@ blockquote {
       z-index: 1;
     }
     nav.shift ul li a:hover {
-      color: #91640F;
+      color: black;
     }
     nav.shift ul li a:after {
       display: block;
