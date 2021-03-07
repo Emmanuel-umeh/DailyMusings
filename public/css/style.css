@@ -1494,7 +1494,7 @@ blockquote {
       z-index: 1;
     }
     nav.shift ul li a:hover {
-      color: rgba(255, 255, 255, 0.5);
+      color: #91640F;
     }
     nav.shift ul li a:after {
       display: block;
@@ -1508,7 +1508,7 @@ blockquote {
       height: 1px;
       content: '.';
       color: transparent;
-      background: #F1C40F;
+      background:rgba(255, 255, 255, 0.5);
       visibility: none;
       opacity: 0;
       z-index: -1;
