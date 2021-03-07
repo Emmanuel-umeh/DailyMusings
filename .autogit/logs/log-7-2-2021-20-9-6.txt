@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Sun Mar 07 2021 20:09:06 GMT+0100 (West Africa Standard Time)
+------------------------------------------------------
+
+Modified files:
+* public/css/style.css
+
+
+Created files:
+* .autogit/logs/log-7-2-2021-20-8-51.txt
+
+
+Deleted files:
+
+
+Renamed files:
