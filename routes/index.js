@@ -171,7 +171,8 @@ router.get("/copyright" , async (req,res)=>{
 
 
   res.render("copyright", {
-    recent_posts
+    recent_posts,
+    moment
   })
 })
 
