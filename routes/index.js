@@ -163,14 +163,16 @@ router.get("/", async(req, res) => {
 
 
 
-router.get("/copyright" , (req,res)=>{
+router.get("/copyright" , async (req,res)=>{
 
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1
   })).slice(0,4)
 
 
-  res.render("copyright")
+  res.render("copyright", {
+    recent_posts
+  })
 })
 
 router.get("/news", async(req, res) => {
