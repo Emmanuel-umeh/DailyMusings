@@ -164,7 +164,7 @@ router.get("/", async(req, res) => {
 
 
 router.get("/copyright" , (req,res)=>{
-  render("")
+  res.render("copyright")
 })
 
 router.get("/news", async(req, res) => {
