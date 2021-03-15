@@ -699,7 +699,7 @@ router.get("/admin-panel/create-blog", isLoggedIn, async(req, res) => {
       successMessage: req.flash("success"),
     })
 })
-router.post("/admin-panel/create-blog", isLoggedIn,  parser.single("profile_picture"), async(req, res) => {
+router.post("/admin-panel/create-blog", isLoggedIn,  parser.single("file"), async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 
