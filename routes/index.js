@@ -315,13 +315,32 @@ console.log("saved succesfully!!!")
 
 
 
-
-
-
-
-
-
 router.get("/about", async(req, res) => {
+  var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    dateCreated : -1
+  })).slice(0,4)
+
+  
+  var categories = await (await BlogCategory.find()).slice(0,10)
+
+   
+  var popular_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
+    views : -1
+  })).slice(0,4)
+
+    res.render("about", {
+      recent_posts,
+      moment  ,
+      categories,
+      popular_posts
+    })
+})
+
+
+
+
+
+router.get("/the-author", async(req, res) => {
   var recent_posts = await ( await Post.find().where('status').equals("published") .populate("category").sort({
     dateCreated : -1
   })).slice(0,4)
