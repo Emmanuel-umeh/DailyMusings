@@ -19,34 +19,6 @@
           </div>
         </div>
 
-        <div class="row mb-5 mt-5">
-          <div class="col-md-12 mb-5">
-            <h2>My Latest Posts</h2>
-          </div>
-          <div class="col-md-12">
-
-            <!-- END post -->
-
-            <%recent_posts.slice(0,5).forEach((post) => {%>
-            <div class="post-entry-horzontal">
-              <a href="/blog/<%=  post.slug %>">
-                <div class="image" style="background-image: url('<%=  post.cover_photo %>');"></div>
-                <span class="text">
-                  <div class="post-meta">
-                    <span class="author mr-2"><img src="/images/victor2.jpeg" alt="dailymusings"> DailyMusings</span>&bullet;
-                    <span class="mr-2"><%= moment(post.dateCreated).format('MMM Do YY') %>  </span> &bullet;
-                    <span class="ml-2"><span class="fa fa-comments"></span> <%= post.comments.length %></span>
-                  </div>
-                  <h2><%= post.title %></h2>
-                </span>
-              </a>
-            </div>
-            <% })%>
-            <!-- END post -->
-
-          </div>
-        </div>
-
         <!-- <div class="row">
           <div class="col-md-12 text-center">
             <nav aria-label="Page navigation" class="text-center">
