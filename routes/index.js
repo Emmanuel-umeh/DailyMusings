@@ -334,7 +334,7 @@ router.get("/about", async(req, res) => {
     views : -1
   })).slice(0,4)
 
-    res.render("about", {
+    res.render("theAuthor", {
       recent_posts,
       moment  ,
       categories,
