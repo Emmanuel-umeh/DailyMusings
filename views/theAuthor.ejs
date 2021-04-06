@@ -8,13 +8,39 @@
         
         <div class="row">
           <div class="col-md-12">
-            <h2 class="mb-4">Welcome to DailyMusings!! </h2>
-            <p class="mb-5"><img src="images/dailymusingspng.png" alt="Image placeholder" class="img-fluid"></p>
-            <p>In a world in desperate need of the truth, goodness, and beauty of God, DailyMusings strengthens the body of Christ by richly communicating the breadth of the true, sound, and beautiful gospel.
-            </p>
-            <p>With today's most critical issues, we present a vision for the world that reflects Christ's love, redemption, and restoration through the daily and in-depth presentation of God's Word borne out of a close walk with the Master over the years.
-            </p>
-            <p>DailyMusings is for everything Christ and in-Christ. Our mission is to be the bearer of God's truth as exposed in the infallible scriptures - The Bible.</p>
+            <h2 class="mb-4">Hi There! I'm Victor</h2>
+            <p class="mb-5"><img src="images/victor2.jpeg" alt="Image placeholder" class="img-fluid"></p>
+            <p>Ayodeji Victor Bolorunduro is a child of God who considers himself a product of Grace. </p>
+            <p>A journalist by profession, Victor, who has had a consistent work with God spanning over two decades, is very passionate about the Word of God and the unrivalled life lessons The Word offers.</p>
+            <p>He is a firm believer in the integrity of God's Word's and its ability to change lives, irrespective of the past.</p>
+            <p>His favourite scripture is Isa. 43:18-19.</p>
+          </div>
+        </div>
+
+        <div class="row mb-5 mt-5">
+          <div class="col-md-12 mb-5">
+            <h2>My Latest Posts</h2>
+          </div>
+          <div class="col-md-12">
+
+            <!-- END post -->
+
+            <%recent_posts.slice(0,5).forEach((post) => {%>
+            <div class="post-entry-horzontal">
+              <a href="/blog/<%=  post.slug %>">
+                <div class="image" style="background-image: url('<%=  post.cover_photo %>');"></div>
+                <span class="text">
+                  <div class="post-meta">
+                    <span class="author mr-2"><img src="/images/victor2.jpeg" alt="dailymusings"> DailyMusings</span>&bullet;
+                    <span class="mr-2"><%= moment(post.dateCreated).format('MMM Do YY') %>  </span> &bullet;
+                    <span class="ml-2"><span class="fa fa-comments"></span> <%= post.comments.length %></span>
+                  </div>
+                  <h2><%= post.title %></h2>
+                </span>
+              </a>
+            </div>
+            <% })%>
+            <!-- END post -->
 
           </div>
         </div>
