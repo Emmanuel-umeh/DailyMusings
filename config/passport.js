@@ -88,6 +88,8 @@ module.exports = function(passport) {
         // Admin.findOne wont fire unless data is sent back
         process.nextTick(async() => {
 
+
+            
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
 
