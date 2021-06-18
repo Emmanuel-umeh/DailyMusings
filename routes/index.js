@@ -835,7 +835,7 @@ router.post("/admin-panel/:id/delete", isLoggedIn, async(req, res) => {
 
 
 
-router.post("/admin-panel/create-category", async(req, res) => {
+router.post("/admin-panel/create-category", isLoggedIn, async(req, res) => {
   // var editor =  FroalaEditor("#example")
 
 var {category_name} = req.body
